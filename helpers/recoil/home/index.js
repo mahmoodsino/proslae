@@ -1,0 +1,5 @@
+export {default as CategoriesAtom} from "./CategoriesAtom"
+export {default as FeaturedCategoriesAtom} from "./FeaturedCategoriesAtom"
+export {default as FeaturedProductAtom} from "./FeaturedProductAtom"
+export {default as BrandsAtom} from "./BrandsAtom"
+export {default as SliderAtom} from "./SliderAtom"

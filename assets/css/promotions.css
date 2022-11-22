@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+ .tabs {
+	 display: none;
+	 margin: 0 auto;
+}
+ @media only screen and (min-width: 1024px) {
+	 .tabs {
+		 display: flex;
+		 justify-content: space-around;
+		 width: 15.7rem;
+		 padding: 0rem 0.5rem;
+		 font-weight: bold;
+		 transform: translateX(0);
+		 transition-duration: 300ms;
+		 transition-timing-function: ease-in-out;
+	}
+}
+ .tab {
+	 margin-top: 0;
+	 padding: 0.5rem 1rem;
+	 cursor: pointer;
+	 list-style-type: none;
+	 transition: 0.3s all;
+	 border-radius: 5px;
+}
+ .tab.selected_tab {
+	 background: #e9fbf2;
+	 color: #29a56c;
+}
+ .tab:hover {
+	 color: #29a56c;
+}
+ .tabs_ {
+	 display: flex;
+	 justify-content: space-around;
+	 width: 15.7rem;
+	 padding: 0rem 0.5rem;
+	 font-weight: bold;
+	 transform: translateX(0);
+	 transition-duration: 300ms;
+	 transition-timing-function: ease-in-out;
+}
+ .tab_ {
+	 margin-top: 0;
+	 padding: 0.5rem 1rem;
+	 cursor: pointer;
+	 list-style-type: none;
+	 transition: 0.3s all;
+	 border-radius: 5px;
+}
+ .tab_.selected_tab_ {
+	 background: #e9fbf2;
+	 color: #29a56c;
+}
+ .tab_:hover {
+	 color: #29a56c;
+}
+ .tab_flex {
+	 display: inline-block;
+	 overflow-x: auto;
+	 align-items: center;
+	 justify-content: space-between;
+}
+ @media only screen and (max-width: 520px) {
+	 .tab_flex {
+		 display: flex;
+		 white-space: nowrap;
+		 text-overflow: ellipsis;
+	}
+}
+ 

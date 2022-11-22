@@ -1,0 +1,70 @@
+:root {
+	--green: #29A56C;
+	--black: #071c1f;
+	--light_brown: #f7f5eb;
+}
+
+.add_icon {
+	width: 30px;
+	height: 30px;
+}
+
+.parent__ {
+	display: flex;
+	justify-content: center;
+	align-items: stretch;
+	transition: 0.3s;
+	cursor: pointer;
+	width: 10rem;
+	border-radius: 5px;
+	border: 2px solid var(--black);
+	padding: 5px;
+}
+
+.parent__ span {
+	margin-left: 6px;
+	margin-top: 2px;
+	font-size: 16px;
+}
+
+.parent__:hover {
+	color: var(--green);
+	border: 2px solid var(--green);
+}
+
+.cancel_img {
+	position: relative;
+}
+
+.icon_remove {
+	position: absolute;
+	top: 8px;
+	right: 10px;
+	margin-bottom: 3px;
+	width: 19px;
+	height: 19px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.icon_remove:hover {
+	color: rgb(182, 31, 31);
+}
+
+.body_ {
+	display: flex;
+	flex-direction: column;
+	margin: 3rem 1rem;
+	overflow: auto;
+}
+
+.body_ .content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: bolder;
+}
+
+.content h5 {
+	font-weight: bolder;
+}

@@ -1,0 +1,1 @@
+export {default as totalPagesAtom } from "./totalPagesAtom"

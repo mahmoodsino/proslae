@@ -1,0 +1,1 @@
+export {default as PrivacyMainSection} from "./MainSection"

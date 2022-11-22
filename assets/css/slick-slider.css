@@ -1,0 +1,94 @@
+:root {
+	--green: #29A56C;
+}
+
+.arrow .slick-next {
+	background: white !important;
+	border-radius: 50%;
+	-webkit-transition: 0.3s all;
+	transition: 0.3s all;
+	border: 1px solid gainsboro;
+	width: 50px;
+	height: 50px;
+	z-index: 15;
+	right: -4%;
+}
+.arrow .slick-next::before {
+	display: none;
+	background-image: url(../images/next.svg);
+	background-size: 30px 30px;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	content: '';
+}
+
+.arrow .slick-prev {
+	background: white !important;
+	border-radius: 50%;
+	-webkit-transition: 0.3s all;
+	border: 1px solid gainsboro;
+	transition: 0.3s all;
+	width: 50px;
+	height: 50px;
+	z-index: 15;
+	left: -4%;
+}
+
+.arrow .slick-prev::before {
+	display: none;
+	background-image: url(../images/prev.svg);
+	background-size: 30px 30px;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	content: '';
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+	background-color: var(--green) !important;
+	color: white !important;
+}
+
+/* END SHOW ARROW */
+
+/* START HIDE ARROW */
+
+.hide_arrow .slick-next {
+	visibility: hidden;
+}
+.hide_arrow .slick-next::before {
+	visibility: hidden;
+}
+
+.hide_arrow .slick-prev {
+	visibility: hidden;
+}
+.hide_arrow .slick-prev::before {
+	visibility: hidden;
+}
+
+/* END HIDE ARROW */
+
+.px {
+	padding: 0 30px;
+}
+
+.slick-dots li button {
+	background: rgb(228, 228, 228);
+	border-radius: 100%;
+	-webkit-transition: 0.3s all;
+	transition: 0.3s all;
+	text-indent: -9999px;
+	overflow: hidden;
+	display: block;
+}
+
+.slick-dots li button:hover {
+	background: var(--green);
+}
+
+li.slick-active button {
+	background: var(--green);
+}

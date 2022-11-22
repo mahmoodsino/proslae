@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --green: #29A56C;
+    --black: #071c1f;
+    --light_brown: #f7f5eb;
+}
+
+.main__details {
+    padding-bottom: 10rem;
+}
+
+@media (min-width: 640px) {
+    .main__details {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .main__details {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .main__details {
+        padding-left: 75px;
+        padding-right: 75px;
+    }
+}
+
+@media (min-width: 1536px) {
+    .main__details {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .details_First_Section {
+        display: flex;
+    }
+}
+
+.details_Photo_Section {
+    margin-top: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+    .details_Photo_Section {
+        width: 50%;
+    }
+}
+
+
+@media (min-width: 640px) {
+    .details_Card_Section {
+        margin-top: 10rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .details_Card_Section {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        margin-top: 2.5rem;
+        width: 50%;
+    }
+}
+
+
+.Details_Secound_Section {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    background: #FBFBFB;
+}
+
+@media (min-width: 1024px) {
+    .Details_Secound_Section {
+        margin-top: 9rem;
+    }
+}
+
+.details_Info_text {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+
+}
+
+.details_Info_Section {
+    margin-top: 0.5rem;
+    height: 0;
+    border-width: 1px;
+    width: 70%;
+
+}
+
+.details_border_Info {
+    margin-left: 2.5rem;
+    height: 0;
+    border-width: 1px;
+    border-color: #000000;
+    width: 15%;
+}
+
+.details_span {
+    display: block;
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+
+}
+
+.details_photo_First_Arrow {
+    position: absolute;
+    left: 0;
+    z-index: 20;
+    color: #000000;
+    text-align: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    top: 95%;
+    background: #f3f3f3;
+}
+
+.details_first_svg {
+    position: absolute;
+    top: 0.375rem;
+    left: 0.625rem;
+    width: 1rem;
+}
+
+.product-slider-img img {
+    object-fit: contain;
+}
+
+.details_photo_secound_Arrow {
+    position: absolute;
+    right: 0;
+    z-index: 20;
+    color: #000000;
+    text-align: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    top: 95%;
+    background: #f3f3f3;
+}
+
+.details_secound_svg {
+    position: absolute;
+    top: 0.375rem;
+    left: 0.625rem;
+    width: 1rem;
+}
+
+
+.slick-dotss.slick-thumbb li {
+    width: 80px;
+    height: 80px;
+    top: 90px;
+    border: 1px solid white;
+    background-color: white;
+    overflow: hidden;
+    display: inline-block;
+
+}
+
+.slick-dotss.slick-thumbb li.slick-active {
+    border: 1px solid black;
+    width: 80px;
+}
+.slick-dotss.slick-thumbb {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+@media (min-width: 640px) {
+    .details_Photo {
+        width: 180px;
+        margin: auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .details_Photo {
+        width: 280px;
+        margin: auto;
+
+    }
+}
+
+@media (min-width: 1024px) {
+    .details_Photo {
+        width: 400px;
+        margin: auto;
+
+    }
+}
+
+
+@media (min-width: 640px) {
+    .realted_Products_Section {
+        margin-top: 1.25rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .realted_Products_Section {
+        margin-top: 3.5rem;
+    }
+}
+
+.related_Product_span {
+    display: block;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.related_Products_Empty {
+    display: block;
+    margin-top: 2.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.related_Products_Card_Section {
+    display: grid;
+    margin-top: 2.5rem;
+}
+
+@media (min-width: 640px) {
+    .related_Products_Card_Section {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .related_Products_Card_Section {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .related_Products_Card_Section {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}

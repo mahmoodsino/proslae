@@ -1,0 +1,31 @@
+.home-slider-parent {
+    display: flex;
+  }
+  .home-slider-parent .left {
+    width: auto;
+    flex-shrink: 0;
+  }
+  .home-slider-parent .right {
+    width: auto;
+    flex-grow: 1;
+  }
+  .home-slider-parent .right .product-img {
+    position: absolute;
+    top: 20px;
+    bottom: 0;
+    right: 3%;
+    margin: auto;
+  }
+  .home-slider-parent .slick-slider {
+    border-radius: 15px;
+    width: 95%;
+    margin: auto;
+    height: 90%;
+    margin-top: 2%;
+    border: #f5f5f5 1px solid;
+    background-color: #F7F7F9;
+    background-image: url('../../assets/img/bg2.jpg');
+    background-size: cover;
+    background-position: bottom;
+  }
+  

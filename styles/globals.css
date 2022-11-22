@@ -1,0 +1,151 @@
+@import url("../assets/css/font-icons.css");
+@import url("../assets/css/my-style.css");
+@import url("../assets/css/plugins.css");
+@import url("../assets/css/responsive.css");
+@import url("../assets/css/slick-slider.css");
+@import url("../assets/css/style.css");
+@import url("../assets/scss/index.css");
+@import url("../components/buttons/button.css");
+@import url("../components/drop-downs/drop-down.css");
+@import url("../components/headers/index.css");
+@import url("../assets/css/home.css");
+@import url("../assets/css/card.css");
+@import url("../assets/css/fotter.css");
+@import url("../assets/css/cart.css");
+@import url("../assets/css/modl.css");
+@import url("../assets/css/main.css");
+@import url("../assets/css/table.css");
+@import url("../assets/css/profile.css");
+@import url("../assets/css/promotions.css");
+@import url("../assets/css/timer.css");
+@import url("../assets/css/details.css");
+@import url("../assets/css/detailsCard.css");
+@import url("../assets/css/checkout.css");
+
+.postal-code{
+    display: flex;
+}
+.postal{
+    width: 15%;
+    margin-right: 5px;
+}
+.phone{
+    width: 85%;
+}
+
+
+.relative_ {
+	position: relative;
+}
+
+.absolute_ {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.absolute__ {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: 9999;
+}
+
+
+.flex______{
+	display: grid;
+	grid-template-columns: auto auto ;
+	gap: 10px;
+  z-index: 100000000000000;
+}
+
+
+
+.mr-2___{
+	/* margin-left: 18px; */
+  display: inline-block;
+}
+
+
+
+.line-clamp____ {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    -webkit-box-pack: end;
+  }
+
+
+  .span-width___ {
+	width: 90%;
+  white-space: nowrap;
+  }
+
+
+  .max-height-categories {
+	max-height: 40vh !important;
+	overflow-y: auto;
+  }
+
+
+  .tab__s{
+    font-weight: bold;
+  }
+
+
+  .pagnation{
+    display: flex;
+    justify-content: center;
+  }
+
+  .pagnation li{
+    list-style-type: none;
+    display: inline-block;
+    padding: 9px;
+    cursor: pointer;
+    margin-left: 2px;
+    font-weight: bold;
+  }
+
+
+  .active_page{
+    background-color: #29A56C;
+      
+  }
+
+  .disable_add {
+    cursor: not-allowed;
+  }
+
+
+  .pointer__Event{
+    pointer-events: none;
+  }
+
+  .css-i0syzg-menu{
+    z-index: 100 !important;
+  }
+
+  .form__address__ {
+    padding-top: 40px;
+    padding-bottom: 30px;
+  }
+
+  .unavailable___{
+    background-color: rgb(254 226 226) !important; 
+  }
+
+
+  .puttom__disable {
+
+  }
+
+  .puttom__disable:disabled{
+    cursor: not-allowed;
+  }
+
+  li{
+    list-style-type: none;
+  }

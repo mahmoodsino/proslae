@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+ .cart_btn {
+	 height: 110px;
+	 width: 110px;
+	 display: -webkit-box;
+	 display: -ms-flexbox;
+	 display: flex;
+	 -webkit-box-orient: vertical;
+	 -webkit-box-direction: normal;
+	 -ms-flex-direction: column;
+	 flex-direction: column;
+	 -webkit-box-align: center;
+	 -ms-flex-align: center;
+	 align-items: center;
+	 -webkit-box-pack: center;
+	 -ms-flex-pack: center;
+	 justify-content: space-evenly;
+	 background-color: #f7f7f9;
+	 padding: 0px;
+	 border-radius: 6px 0px 0px 6px;
+	 -webkit-box-shadow: 0 2px 20px rgba(1, 1, 1, 0.2);
+	 box-shadow: 0 2px 20px rgba(1, 1, 1, 0.2);
+	 border: 0px;
+	 outline: 0px;
+	 cursor: pointer;
+	 position: fixed;
+	 transition: 0.2s all;
+	 right: -15px;
+	 top: 47vh;
+	 padding-right: 15px;
+	 z-index: 9999;
+}
+ .cart_btn .price_section {
+	 width: 80%;
+	 background-color: #29a56c;
+	 color: white;
+	 text-align: center;
+	 border-radius: 5px;
+	 padding: 5px;
+}
+ .cart_btn .mini-cart-icon {
+	 margin-right: 0 !important;
+	 margin-left: 5px !important;
+}
+ .cart_btn:hover {
+	 right: -8px;
+}
+ .bottom_cart {
+	 display: flex;
+	 position: fixed;
+	 justify-content: space-between;
+	 width: 80%;
+	 cursor: pointer;
+	 padding: 3px 3px 2px 20px;
+	 bottom: 0.6rem;
+	 right: 10vw;
+	 z-index: 30;
+	 background-color: #e9fbf2;
+	 border-radius: 50px;
+	 -webkit-box-shadow: 0 2px 10px rgba(1, 1, 1, 0.2);
+	 box-shadow: 0 2px 10px rgba(1, 1, 1, 0.2);
+}
+ .bottom_cart .left {
+	 margin-bottom: 5px;
+}
+ .bottom_cart .right {
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+	 width: 90px;
+	 background-color: #29a56c;
+	 text-align: center;
+	 border-radius: 50px;
+	 padding: 5px;
+}
+ .bottom_cart .right h5 {
+	 margin-top: 6px;
+	 color: white;
+}
+ 

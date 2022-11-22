@@ -1,0 +1,1 @@
+export {default as DetailsMainSection} from"./MainSection";

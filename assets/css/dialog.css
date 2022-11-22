@@ -1,0 +1,291 @@
+:root {
+	--orange: #ffb800;
+	--green: #29a56c;
+}
+
+.col-1_ {
+	width: 8.33%;
+}
+.col-2_ {
+	width: 16.66%;
+}
+.col-3_ {
+	width: 25%;
+}
+.col-4_ {
+	width: 33.33%;
+}
+.col-5_ {
+	width: 41.66%;
+}
+.col-6_ {
+	width: 50%;
+}
+.col-7_ {
+	width: 58.33%;
+}
+.col-8_ {
+	width: 66.66%;
+}
+.col-9_ {
+	width: 75%;
+}
+.col-10_ {
+	width: 83.33%;
+}
+
+.col-11_ {
+	width: 91.66%;
+}
+
+.col-12_ {
+	width: 100%;
+}
+
+.modal {
+	display: block;
+	position: fixed; /* Stay in place */
+	z-index: 9999; /* Sit on top */
+	padding-top: 130px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 30px;
+	color: black;
+	border: 1px solid #888;
+	width: 45%;
+}
+
+/* The Close Button */
+.close {
+	color: #aaaaaa;
+	width: 10px;
+	font-size: 28px;
+	transition: 0.5s;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.dialog_body {
+	width: 43.5rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.dialog_body img {
+	width: 80%;
+	height: 80%;
+}
+
+.right_side {
+	display: flex;
+	flex-direction: column;
+}
+
+.right_side h1 {
+	color: var(--green);
+	font-weight: bolder;
+	font-size: 37px;
+}
+
+.right_side h3 {
+	font-weight: bolder;
+}
+
+.row_parent {
+	position: relative;
+	width: 100%;
+}
+
+.row_ h1:nth-child(2) {
+	font-size: 50px;
+}
+
+.row_ h4 {
+	margin-left: 3rem;
+}
+
+.row_::after {
+	content: '';
+	width: 100%;
+	height: 1px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background-color: rgb(196, 194, 194);
+}
+
+.right_side .row_ {
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.right_side div h1:nth-child(2) {
+	margin-left: 22%;
+}
+
+.cates_parent {
+	position: relative;
+}
+
+.cates_ {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin: 20px 0px 20px 0px;
+}
+
+.cates_::after {
+	content: '';
+	width: 100%;
+	height: 1px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background-color: rgb(196, 194, 194);
+}
+
+.cates_ h5:nth-child(2) {
+	margin-left: 25px;
+	font-weight: bold;
+}
+
+.cart_ {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.cart_ .addBTN {
+	margin: 1rem 1rem;
+}
+
+@media screen and (max-width: 500px) {
+	.dialog_body {
+		flex-direction: column;
+		width: 19rem;
+	}
+	.cart_ {
+		flex-direction: column;
+		margin-bottom: 15px;
+	}
+}
+
+.login_dialog {
+	margin-top: 10%;
+	margin: 30px 0 10px 0;
+}
+
+.after_parent {
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px solid #000;
+	line-height: 0.1em;
+	margin: 30px 0 20px 0;
+}
+
+.after_parent span {
+	background: #fff;
+	padding: 0 10px;
+}
+
+.address_dialog {
+	width: 27rem;
+	height: 23.5rem;
+	margin: 40px 0 10px 0;
+}
+
+.address_dialog_content {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.cursor_disabled {
+	cursor: not-allowed;
+}
+
+.categories_dialog {
+	width: 25rem;
+	margin-top: 40px;
+}
+
+.added_product_dialog {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 35rem;
+	padding-top: 2.5rem;
+	height: 12rem;
+}
+
+.added_product_dialog .right_side {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-left: 2rem;
+}
+
+.added_product_dialog img {
+	width: 8rem;
+	height: 8rem;
+	object-fit: contain;
+}
+
+.filter_category_body {
+	min-height: 15rem;
+}
+
+.filter_category_body .flex__ {
+	display: flex;
+	flex-wrap: wrap;
+	min-width: 95%;
+	max-width: 95%;
+	justify-content: space-between;
+}
+
+.filter_category_body .flex__ li {
+	list-style: none;
+	flex: 0 0 50%;
+}
+
+@media only screen and (max-width: 520px) {
+	.categories_dialog {
+		width: 18rem;
+	}
+	.added_product_dialog {
+		width: 19rem;
+	}
+	.added_product_dialog .right_side {
+		margin-left: 0rem;
+	}
+	.address_dialog {
+		width: 18rem;
+	}
+}

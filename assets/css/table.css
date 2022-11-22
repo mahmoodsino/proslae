@@ -1,0 +1,115 @@
+:root {
+	--green: #29A56C;
+	--black: #071c1f;
+}
+.table_row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100px;
+}
+
+.table_row p {
+	width: 3rem;
+}
+
+.table_row > span {
+	font-size: x-large;
+	transition-duration: 0.2s;
+	cursor: pointer;
+}
+
+.table_row > span:hover {
+	color: var(--green);
+}
+
+.inc_dec {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	align-content: center;
+	justify-content: space-evenly;
+	border: 1px solid rgba(231, 230, 230, 0.829);
+	padding: 20px 0;
+	width: 150px;
+}
+
+.inc_dec span span {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.span_ {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 0 10px;
+	width: 100%;
+}
+
+.i_ {
+	font-size: 15px;
+}
+
+.span__:after {
+	content: '';
+	position: absolute;
+	right: 0px;
+	top: -20px;
+	background-color: rgba(231, 230, 230, 0.829);
+	width: 1px;
+	height: 67px;
+}
+
+.cursor_pointer {
+	cursor: pointer;
+}
+
+.cursor_pointer:hover {
+	color: var(--green);
+}
+
+.truncate {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-top: 35px;
+}
+
+@media only screen and (min-width: 720px) {
+	.truncate {
+		width: 20rem;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		margin-top: 35px;
+	}
+}
+
+.btn_ {
+	background-color: transparent;
+	transition: 0.3s;
+}
+
+.btn_:hover {
+	color: var(--green);
+}
+
+.btn_:focus {
+	outline-style: none;
+	outline-width: 0;
+}
+
+.table_ {
+	display: block;
+	overflow: scroll;
+	overflow-x: auto;
+}
+
+.center_ {
+	margin-top: 2rem;
+	text-align: center;
+}

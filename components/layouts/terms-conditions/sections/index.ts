@@ -1,0 +1,1 @@
+export {default as TermMainSection} from "./MainSection"

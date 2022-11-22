@@ -1,0 +1,1 @@
+export {default as CategoriesBaseComponent} from "./SidebarComponent"

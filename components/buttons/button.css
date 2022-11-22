@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+ .animated_green {
+	 padding: 18px 40px;
+	 background-color: #29a56c;
+	 font-weight: bold;
+	 color: white;
+	 width: 100%;
+}
+ .animated_green:focus {
+	 outline: none;
+}
+ .animated_black {
+	 padding: 18px 40px;
+	 background-color: #071c1f;
+	 color: white;
+	 font-weight: bold;
+	 width: 100%;
+}
+ .animated_white {
+	 padding: 18px 43px;
+	 font-size: large;
+	 background-color: white;
+	 font-weight: bold;
+}
+ .animated_white:hover {
+	 color: white;
+}
+ .mv_top {
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 position: fixed;
+	 bottom: 70px;
+	 right: 40px;
+	 width: 45px;
+	 height: 45px;
+	 border-radius: 80px;
+	 box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+	 transition: 0.2s;
+	 transform: rotateZ(90deg);
+	 z-index: 30;
+	 color: #fff;
+	 background: #29a56c;
+}
+ .mv_top:hover {
+	 background-color: #29a56c;
+	 color: white;
+	 outline-width: 0ch;
+	 margin-bottom: 5px;
+}
+ .no_rotate {
+	 -ms-transform: rotate(-45deg);
+	 transform: rotate(-45deg);
+}
+ 

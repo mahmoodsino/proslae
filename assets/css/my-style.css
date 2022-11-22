@@ -1,0 +1,87 @@
+.my_btn {
+	height: 60px;
+	color: white;
+	font-size: larger;
+	font-weight: bold;
+	transition: 0.4s;
+	border-radius: 1px;
+	background-color: #29A56C;
+	text-transform: uppercase;
+}
+
+.my_btn:hover {
+	color: white;
+	outline: none;
+}
+
+.my_btn_ {
+	outline: none;
+}
+
+.my_btn:focus {
+	outline: none;
+}
+
+.my_btn_:focus {
+	outline: none;
+}
+
+.backdrop_menu {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 100;
+}
+
+.base {
+	position: relative;
+}
+
+.image_ {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.category_height {
+	height: 30rem;
+	overflow-y: auto;
+}
+
+.side_bar::-webkit-scrollbar {
+	width: 4px;
+}
+
+/* Track */
+.side_bar::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 2px grey;
+	border-radius: 10px;
+}
+
+/* Handle */
+.side_bar::-webkit-scrollbar-thumb {
+	background: rgb(168, 167, 167);
+	border-radius: 10px;
+}
+
+.no_outline {
+	outline: none;
+}
+
+.flex_ {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.w-10 {
+	width: 22rem;
+}
+
+.site-logo img{
+    height: 50px;
+}

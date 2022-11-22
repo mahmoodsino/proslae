@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+ .x-box-parent {
+	 height: 100vh;
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+	 background-image: url('../../assets/img/bg1.jpg');
+	 background-color: #f8f8f8;
+}
+ .x-box-parent .x-box {
+	 width: 95%;
+	 max-width: 1200px;
+	 background: #fff;
+	 border-radius: 3px;
+	 padding: 15px;
+	 box-shadow: rgba(0, 0, 0, 0.02) 0 0 13px;
+	 display: flex;
+}
+ .x-box-parent .x-box .right {
+	 width: 45%;
+	 padding-top: 50%;
+	 position: relative;
+}
+ .x-box-parent .x-box .right img {
+	 border-radius: 10px;
+	 position: absolute;
+	 top: 0;
+	 left: 0;
+	 width: 100%;
+	 height: 100%;
+	 object-fit: cover;
+	 background-color: #f8f8f8;
+}
+ .x-box-parent .x-box .left {
+	 width: 55%;
+	 padding-right: 15px;
+}
+ .x-box-parent .x-box .left .login-box, .x-box-parent .x-box .left .enter-box {
+	 padding-top: 25px;
+	 padding-left: 10%;
+	 padding-right: 10%;
+}
+ .x-box-parent .x-box .left .login-box .logo, .x-box-parent .x-box .left .enter-box .logo {
+	 height: 70px;
+}
+ .x-box-parent .x-box .left .login-box .welcome, .x-box-parent .x-box .left .enter-box .welcome {
+	 margin-top: 40px;
+	 margin-bottom: 30px;
+	 color: #777;
+	 font-weight: 400;
+	 font-size: 1.3rem;
+	 line-height: 1.4;
+}
+ .x-box-parent .x-box .left .login-box .or, .x-box-parent .x-box .left .enter-box .or {
+	 text-align: center;
+	 padding: 25px;
+	 margin-top: -8px;
+	 position: relative;
+	 font-weight: bold;
+	 color: rgba(0, 0, 0, 0.35);
+}
+ .x-box-parent .x-box .left .login-box .or::before, .x-box-parent .x-box .left .enter-box .or::before, .x-box-parent .x-box .left .login-box .or::after, .x-box-parent .x-box .left .enter-box .or::after {
+	 content: '';
+	 height: 1px;
+	 background: rgba(0, 0, 0, 0.15);
+	 width: 43%;
+	 top: 0;
+	 bottom: 0;
+	 left: 0;
+	 margin: auto;
+	 display: block;
+	 position: absolute;
+}
+ .x-box-parent .x-box .left .login-box .or::after, .x-box-parent .x-box .left .enter-box .or::after {
+	 left: unset;
+	 right: 0;
+}
+ .x-box-parent .x-box .left .form-box {
+	 padding-top: 25px;
+	 padding-left: 10%;
+	 padding-right: 10%;
+}
+ .x-box-parent .x-box .left .form-box .agree-box {
+	 font-weight: 600;
+	 font-size: 13px;
+	 color: #999;
+	 margin-top: 15px;
+}
+ .x-box-parent .x-box .left .form-box .agree-box a {
+	 font-weight: bold;
+	 color: rgba(41, 165, 108, 0.8);
+}
+ @media (max-width: 520px) {
+	 .x-box-parent .x-box {
+		 width: 92%;
+		 padding: 5px;
+	}
+	 .x-box-parent .x-box .right {
+		 display: none;
+	}
+	 .x-box-parent .x-box .left {
+		 width: 100vw;
+		 padding: 0;
+	}
+	 .x-box-parent .x-box .left .form-box {
+		 padding: 20px 10px;
+	}
+	 .x-box-parent .x-box .left .form-box .flex_register {
+		 display: flex;
+		 justify-content: space-between;
+	}
+}
+ 
