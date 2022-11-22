@@ -8,6 +8,7 @@ import {
   AddToCartLoadingAtom,
   CartItemsAtom,
   RemveFromCartAtom,
+  TokenAtom,
 } from "../../helpers/recoil";
 import { ProductsType } from "../../helpers/types";
 import ManageCart from "./ManageCart";
@@ -23,6 +24,7 @@ const ProductCard = ({ product }: Props) => {
   const [addLoading, setAddLoading] = useRecoilState(AddToCartLoadingAtom);
   const [cartItems, setCartItems] = useRecoilState(CartItemsAtom);
   const {push}=useRouter()
+  const [token,setToken]=useRecoilState(TokenAtom)
 
   const handleLoad = () => {
     setLoaded(true);
@@ -95,7 +97,7 @@ const ProductCard = ({ product }: Props) => {
         <div className={`${canAddToCart() ? "product-btns" : "disable_add"} `}>
           <button
             disabled={canAddToCart() ? false : true}
-            onClick={() => addtoCArt(product)}
+            onClick={() =>( token ?  addtoCArt(product) : push("/main"))}
           >
             <ShoppingCartPlus size="17" />
             Add

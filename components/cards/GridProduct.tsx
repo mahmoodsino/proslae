@@ -42,7 +42,6 @@ const GridProduct = ({ product }: Props) => {
   const addtoCArt = useRecoilValue(AddToCartAtom);
   const removeFromCart = useRecoilValue(RemveFromCartAtom);
   const [addLoading, setAddLoading] = useRecoilState(AddToCartLoadingAtom);
-
   const handleLoad = () => {
     setLoaded(true);
   };
@@ -149,7 +148,7 @@ const GridProduct = ({ product }: Props) => {
         <div className={`${canAddToCart() ? "product-btns" : "disable_add"} `}>
           <button
             disabled={canAddToCart() ? false : true}
-            onClick={() => addtoCArt(product)}
+            onClick={() =>( token ?  addtoCArt(product) : push("/main"))}
           >
             <ShoppingCartPlus size="17" />
             Add
