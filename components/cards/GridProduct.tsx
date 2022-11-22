@@ -118,7 +118,7 @@ const GridProduct = ({ product }: Props) => {
     if (handelCart(product.variation.id)) {
       return (
         <div className="container__ product-count-btns">
-          <button onClick={() => removeFromCart(cartItems[indexcart].id)}>
+          <button onClick={() => (cartItems[indexcart].id && removeFromCart(cartItems[indexcart].id))}>
             <Minus size="20" />
           </button>
           <span className="child__ count-num">

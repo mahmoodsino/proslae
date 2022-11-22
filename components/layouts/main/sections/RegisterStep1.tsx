@@ -8,8 +8,8 @@ const RegisterStep1 = () => {
 			<h4 className="mb-3 font-weight-bold">Register Your Account</h4>
 			<RegisterForm />
 			<div className="agree-box">
-				By registering, you agree to WHOLE SALE HOUSE's{' '}
-				<Link href="/terms-conditions">Terms and Condistions</Link> &{' '}
+				By registering, you agree to WHOLE SALE HOUSE,s
+				<Link href="/terms-conditions">Terms and Condistions</Link> &
 				<Link href="/privacy-policy">Privacy Policy</Link>
 			</div>
 		</div>

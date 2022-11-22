@@ -1,13 +1,13 @@
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { useRecoilState } from "recoil";
 import { User } from "tabler-icons-react";
 import { Package, MapPin, UserCheck, Logout } from "tabler-icons-react";
-import useLogout from "../../helpers/hooks/useLogout";
+import { confirmDialog, removeUser } from "../../helpers/Common";
 import { TokenAtom } from "../../helpers/recoil/token";
 import { UserAtom } from "../../helpers/recoil/user";
-import { getUser, handelLogout } from "../../helpers/server/services";
+import {  handelLogout } from "../../helpers/server/services";
 
 export default function UserDropDown() {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
@@ -16,7 +16,16 @@ export default function UserDropDown() {
   
 
   const logout = async () => {
-	useLogout().handleLogout()
+    confirmDialog ('Logout', 'Sure to logout?', async (callback:any) => {
+			if (callback) {
+                if(token!==null){
+                    const res = await handelLogout(token);
+                }
+				removeUser();
+                window.location.href="/main"
+				return;
+			}
+		});
   };
 
 

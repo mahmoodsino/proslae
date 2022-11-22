@@ -36,7 +36,7 @@ function Card() {
               </Link>
               <span
                 className="mini-cart-item-delete"
-                onClick={() => item.id && removeFromCart(item.id, "remove")}
+                onClick={() => item.id && removeFromCart(item.id,"remove")}
               >
                 <X />
               </span>

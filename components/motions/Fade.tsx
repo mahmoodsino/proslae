@@ -34,7 +34,7 @@ const FadeMotion = ({ children, isShow, className }:Props) => {
           exit="hidden"
           animate="visible"
           variants={fadeVariants}
-          className={className}
+          // className={className ? className : ""}
         >
           {children}
         </motion.div>

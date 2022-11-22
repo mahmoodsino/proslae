@@ -43,7 +43,11 @@ function Row({Products}:Props) {
 				<p className="center_">{Products.quantity}</p>
 			</td>
 			<td>
-				<p className="center_">${formatFloatNumber(Products?.variation?.price * Products.quantity)}</p>
+				<p className="center_">
+				{
+              Products?.variation?.price &&
+            formatFloatNumber(Products.quantity * Products?.variation?.price )
+            }					</p>
 			</td>
 		</tr>
 	);

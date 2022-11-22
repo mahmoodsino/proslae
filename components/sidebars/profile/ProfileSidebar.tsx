@@ -2,9 +2,10 @@ import Link from "next/link";
 import React from "react";
 import { useRecoilState } from "recoil";
 import { Logout, MapPin, Package, UserCheck } from "tabler-icons-react";
-import { profileSections } from "../../../helpers/Common";
-import useLogout from "../../../helpers/hooks/useLogout";
+import { confirmDialog, profileSections, removeUser } from "../../../helpers/Common";
+import { TokenAtom } from "../../../helpers/recoil";
 import { ProfileTabsAtom } from "../../../helpers/recoil/profile";
+import { handelLogout } from "../../../helpers/server/services";
 
 const tabs = [
   {
@@ -26,13 +27,23 @@ const tabs = [
 
 const ProfileSidebar = () => {
   const [profileTab, setProfileTab] = useRecoilState(ProfileTabsAtom);
+  const [token,setToken]=useRecoilState(TokenAtom)
 
   const handlePanel = (value: string) => {
     setProfileTab(value);
   };
 
   const logout = () => {
-    useLogout().handleLogout();
+    confirmDialog ('Logout', 'Sure to logout?', async (callback:any) => {
+			if (callback) {
+                if(token!==null){
+                    const res = await handelLogout(token);
+                }
+				removeUser();
+                window.location.href="/main"
+				return;
+			}
+		});
   };
   return (
     <div className="ltn__tab-menu-list mb-50">

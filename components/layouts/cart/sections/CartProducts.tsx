@@ -193,7 +193,7 @@ function Row({ product, loading, setLoading }: Props) {
     >
       <td>
         <div className="table_row">
-          <span onClick={() => handleRemoveFromCart(product?.id, "remove")}>
+          <span onClick={() =>product?.id&& handleRemoveFromCart(product?.id, "remove")}>
             <X />
           </span>
         </div>
@@ -217,7 +217,7 @@ function Row({ product, loading, setLoading }: Props) {
         <div className="table_row">
           <div className="inc_dec">
             <span
-              onClick={() => handleRemoveFromCart(product?.id)}
+              onClick={() => product?.id && handleRemoveFromCart(product?.id)}
               className="span_ cursor_pointer"
             >
               <span className="span__">
@@ -262,7 +262,10 @@ function Row({ product, loading, setLoading }: Props) {
       <td className="cart-product-subtotal">
         <div className="table_row">
           <p className="mt-10">
-            ${formatFloatNumber(product.quantity * product?.variation?.price)}
+            {
+              product?.variation?.price &&
+            formatFloatNumber(product.quantity * product?.variation?.price )
+            }
           </p>
         </div>
       </td>
