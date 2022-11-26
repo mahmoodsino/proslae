@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Minus, Plus, ShoppingCartPlus } from "tabler-icons-react";
+import { getAnimateMobileStyle, getAnimateStyle, getStaticStyle } from "../../helpers/Common";
 import {
   AddToCartAtom,
   AddToCartLoadingAtom,
@@ -25,9 +27,63 @@ const ProductCard = ({ product }: Props) => {
   const [cartItems, setCartItems] = useRecoilState(CartItemsAtom);
   const {push}=useRouter()
   const [token,setToken]=useRecoilState(TokenAtom)
-
+  const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
+  const [coordinator, setCoordinator] = useState({
+    x: 0,
+    y: 0,
+  });
+  const [animateImage, setAnimateImage] = useState(false);
+  const [moveImage, setMoveImage] = useState(false);
   const handleLoad = () => {
     setLoaded(true);
+  };
+
+  
+  const handleAnimateImage = (e: any) => {
+    console.log({ e });
+
+    setCoordinator({
+      x: e.clientX - 150,
+      y: e.clientY - 200,
+    });
+    setAnimateImage(true);
+    setTimeout(() => {
+      setMoveImage(true);
+      setTimeout(() => {
+        setAnimateImage(false);
+        setMoveImage(false);
+        setCoordinator({
+          x: 0,
+          y: 0,
+        });
+      }, 2000);
+    }, 300);
+  };
+
+  const renderAnimation = () => {
+    if (!moveImage) return getStaticStyle(coordinator.y, coordinator.x);
+    if (moveImage && !isMobile) return getAnimateStyle();
+    if (moveImage && isMobile) return getAnimateMobileStyle();
+  };
+
+  const renderImage = () => {
+    let im = "";
+    if (product?.images?.length !== 0) {
+      product.images.map((img) => {
+        if (img.is_default) {
+          im = img.path;
+        }
+      });
+    } else {
+      im = "/alternative.png";
+    }
+
+    return im;
+  };
+
+  const addToCart = (e: any) => {
+    handleAnimateImage(e);
+    addtoCArt(product);
   };
 
   const handelCart = (id: number) => {
@@ -97,7 +153,7 @@ const ProductCard = ({ product }: Props) => {
         <div className={`${canAddToCart() ? "product-btns" : "disable_add"} `}>
           <button
             disabled={canAddToCart() ? false : true}
-            onClick={() =>( token ?  addtoCArt(product) : push("/main"))}
+            onClick={(e) => (token ? addToCart(e) : push("/main"))}
           >
             <ShoppingCartPlus size="17" />
             Add
@@ -119,15 +175,14 @@ const ProductCard = ({ product }: Props) => {
   };
 
 
-  const handelMoveToDetails = async () => {
-    push({
-      pathname: "/details",
-      query: { product: encodeURI(`${product?.id}`) },
-    });
-  };
+
 
   return (
     <>
+    {animateImage && (
+        //@ts-ignore
+        <img src={renderImage()} alt="" style={renderAnimation()} />
+      )}
       <div
         className={`ltn__product-item ltn__product-item-3 ${
           addLoading && "pointer__Event"
@@ -136,17 +191,7 @@ const ProductCard = ({ product }: Props) => {
         <div>
           <Link href="#">
             <div className="card_img">
-              {product?.images?.map((item,i)=> {
-                if(item.is_default){
-                  return(
-                    <img key={i} src={item.path} alt="" onLoad={handleLoad} />
-                  )
-                }
-              })}
-              {product?.images?.length===0 &&
-                <img  src="alternative.png" alt="" />
-              
-              }
+            <img src={renderImage()} alt="" />
             </div>
           </Link>
           {has_discount_promotion() && (

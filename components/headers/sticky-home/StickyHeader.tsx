@@ -14,15 +14,12 @@ const StickyHeader = () => {
   const { showHeader } = useShowStickyHeader.default();
   const [searchInput, setSearchInput] = useState(false);
 
-
   const toggleMenu = () => {
 
   };
-
   const toggleSearchInput = () => {
     setSearchInput((prevState) => !prevState);
   };
-
   const renderResponsiveComponent = () => {
     if (!isMobile)
       return (

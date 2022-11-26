@@ -25,6 +25,7 @@ interface Props {
 
 
 const FadeMotion = ({ children, isShow, className }:Props) => {
+  
   return (
     <AnimatePresence>
       {isShow && (
@@ -34,7 +35,8 @@ const FadeMotion = ({ children, isShow, className }:Props) => {
           exit="hidden"
           animate="visible"
           variants={fadeVariants}
-          // className={className ? className : ""}
+          //@ts-ignore
+          className={className ? className : ""}
         >
           {children}
         </motion.div>

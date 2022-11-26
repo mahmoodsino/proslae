@@ -17,7 +17,6 @@ import {
 } from "../../helpers/recoil";
 import { TokenAtom } from "../../helpers/recoil/token";
 import { ProductsType } from "../../helpers/types";
-import ManageCart from "./ManageCart";
 import { useToasts } from "react-toast-notifications";
 
 interface Props {
@@ -38,7 +37,6 @@ const GridProduct = ({ product }: Props) => {
   const [cartItems, setCartItems] = useRecoilState(CartItemsAtom);
   const timerRef = useRef() as MutableRefObject<NodeJS.Timeout>;
   const { addToast } = useToasts();
-  // addToast("Something wrong happened!", { appearance: "error" });
   const addtoCArt = useRecoilValue(AddToCartAtom);
   const removeFromCart = useRecoilValue(RemveFromCartAtom);
   const [addLoading, setAddLoading] = useRecoilState(AddToCartLoadingAtom);
@@ -58,6 +56,8 @@ const GridProduct = ({ product }: Props) => {
   };
 
   const handleAnimateImage = (e: any) => {
+    console.log({ e });
+
     setCoordinator({
       x: e.clientX - 100,
       y: e.clientY - 200,
@@ -83,14 +83,23 @@ const GridProduct = ({ product }: Props) => {
   };
 
   const renderImage = () => {
-    if (!loaded) return "/alternative.png";
+    let im = "";
+    if (product?.images?.length !== 0) {
+      product.images.map((img) => {
+        if (img.is_default) {
+          im = img.path;
+        }
+      });
+    } else {
+      im = "/alternative.png";
+    }
+
+    return im;
   };
 
   const addToCart = (e: any) => {
-    if (token) {
-      return;
-    }
-    push("/main");
+    handleAnimateImage(e);
+    addtoCArt(product);
   };
   const canAddToCart = () => {
     let canAdd = true;
@@ -117,7 +126,11 @@ const GridProduct = ({ product }: Props) => {
     if (handelCart(product.variation.id)) {
       return (
         <div className="container__ product-count-btns">
-          <button onClick={() => (cartItems[indexcart].id && removeFromCart(cartItems[indexcart].id))}>
+          <button
+            onClick={() =>
+              cartItems[indexcart].id && removeFromCart(cartItems[indexcart].id)
+            }
+          >
             <Minus size="20" />
           </button>
           <span className="child__ count-num">
@@ -148,7 +161,7 @@ const GridProduct = ({ product }: Props) => {
         <div className={`${canAddToCart() ? "product-btns" : "disable_add"} `}>
           <button
             disabled={canAddToCart() ? false : true}
-            onClick={() =>( token ?  addtoCArt(product) : push("/main"))}
+            onClick={(e) => (token ? addToCart(e) : push("/main"))}
           >
             <ShoppingCartPlus size="17" />
             Add
@@ -171,7 +184,10 @@ const GridProduct = ({ product }: Props) => {
 
   return (
     <>
-      {/* {animateImage && <img src={renderImage()} alt="" style={renderAnimation()} />} */}
+      {animateImage && (
+        //@ts-ignore
+        <img src={renderImage()} alt="" style={renderAnimation()} />
+      )}
       <div
         className={`col-lg-4 col-sm-6 col-6  ${addLoading && "pointer__Event"}`}
       >
@@ -179,16 +195,7 @@ const GridProduct = ({ product }: Props) => {
           <div>
             <Link href="">
               <div className="card_img">
-              {product?.images?.map((item, i) => {
-                if (item.is_default) {
-                  return <img key={i} src={item.path} alt="" />;
-                }
-              })}
-              {product?.images?.length===0 &&
-                <img  src="alternative.png" alt="" />
-              
-              }
-              
+                <img src={renderImage()} alt="" />
               </div>
             </Link>
             {has_discount_promotion() && (
