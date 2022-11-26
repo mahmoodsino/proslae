@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HOME_PAGE, FEATURED_PRODUCTS, BRANDS, REGIDTERASINDIVIDUAL, LOGIN, LOGOUT, USERINFO, COUNTRIES, STATES, CITIES, PRODUCTS, ADDTOCART, UPDATECART, GETCARTITEMS, DELETECART, ADDADDRESS, GETADDRESS, PROMOTIONS, DETAILS, SIMILARPRODUCTS, ABOUTUS, REGISTERASSTORE, CREATEORDER } from "./APIs";
+import { HOME_PAGE, FEATURED_PRODUCTS, BRANDS, REGIDTERASINDIVIDUAL, LOGIN, LOGOUT, USERINFO, COUNTRIES, STATES, CITIES, PRODUCTS, ADDTOCART, UPDATECART, GETCARTITEMS, DELETECART, ADDADDRESS, GETADDRESS, PROMOTIONS, DETAILS, SIMILARPRODUCTS, ABOUTUS, REGISTERASSTORE, CREATEORDER, UPDATEUSER } from "./APIs";
 const getConfig = (token?: string | null) => {
 	return {
 		headers: {
@@ -22,9 +22,23 @@ const getHomePageData = async () => {
 	}
 };
 
-const getFeaturedProducts = async () => {
+interface FeaturedParams  {
+	categoryId?:number
+	token?:string
+}
+
+const getFeaturedProducts = async (params:FeaturedParams) => {
 	try {
-		const res = await axios.get(`${FEATURED_PRODUCTS}?is_featured=1`, getConfig());
+		const res = await axios.get(`${FEATURED_PRODUCTS}?is_featured=1`,{
+			headers: {
+				"branch-id": "1",
+				"company-id": 1,
+				Authorization: `Bearer ${params.token}`
+			},
+			params: {
+				category: params.categoryId,
+			}
+		});
 		return res.data;
 	} catch (error: any) {
 		console.log(error.response);
@@ -431,5 +445,26 @@ const getOrders = async (token:string) => {
     }
 }
 
+interface updateUSerParams {
+	token: string,
+    firstName:string,
+    lastName:string,
+	email:string
+}
 
-export { getHomePageData, getFeaturedProducts, getBrands, handelRegister, handelLogin, handelLogout, getUser, getCountries, getStateOfCountry, getCitesOfState, getProducts, addToCart, updateCart, getCartItems, deleteCart, handelAddAress, getAddress, handelUpdateAddress, deleteAddress, getPromotions, getPromotionsProducts, getProductDetails, getSimilarProducts, getAbouUsInfo, handelRegisterAsStore,handelCrateOrder,getOrderById,getOrders };
+const handelUpdateUserInfo = async (params: updateUSerParams) => {
+    try {
+        const res = await axios.post(`${UPDATEUSER}`,{
+                first_name: params.firstName,
+                last_name: params.lastName,
+				email:params.email
+        }, getConfig(params.token))
+        return res.data
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
+
+export { getHomePageData, getFeaturedProducts, getBrands, handelRegister, handelLogin, handelLogout, getUser, getCountries, getStateOfCountry, getCitesOfState, getProducts, addToCart, updateCart, getCartItems, deleteCart, handelAddAress, getAddress, handelUpdateAddress, deleteAddress, getPromotions, getPromotionsProducts, getProductDetails, getSimilarProducts, getAbouUsInfo, handelRegisterAsStore,handelCrateOrder,getOrderById,getOrders,handelUpdateUserInfo };

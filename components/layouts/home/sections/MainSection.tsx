@@ -33,34 +33,21 @@ import BrandsDialog from "../../../dialogs/BrandsDialog";
 import openCategoriesDialogAtom from "../../../../helpers/recoil/sidebar/openCategoriesDialogAtom";
 import CategoriesDialog from "../../../dialogs/CategoriesDialog";
 import { SliderAtom } from "../../../../helpers/recoil";
+import { SelectedFeaturedCAtegories } from "./ProductTap";
 
 const MainSection = () => {
 
-  const { addToast } = useToasts();
   const [currentIndex, setIndex] = useState(1);
   const [progress, setPropgress] = useState(false);
   const [slider, setSlider] = useRecoilState(SliderAtom)
-  const [featuredProducts, setFeaturedProducts] =
-    useRecoilState(FeaturedProductAtom);
+
     const[token,setToken]=useRecoilState(TokenAtom)
     const isMobile = useMediaQuery({ query: '(max-width: 500px)' });
-    const [openBrandDialog,setOpenBrandDialog]=useRecoilState(openBrandsDialogAtom)
-    const [openCategoriesDialog,setOepnCategoriesDialog]=useRecoilState(openCategoriesDialogAtom)
 
 
 
 
-  useEffect(() => {
-    const getData = async () => {
-      const res = await getFeaturedProducts();
-      if (res === null) {
-        addToast("Something wrong happened!", { appearance: "error" });
-      } else {
-        setFeaturedProducts(res.result.items);
-      }
-    };
-    getData();
-  }, []);
+
 
   const renderSidebar = () => {
     if (currentIndex === 1) return <Categories />;

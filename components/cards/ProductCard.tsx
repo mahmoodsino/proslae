@@ -4,7 +4,11 @@ import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Minus, Plus, ShoppingCartPlus } from "tabler-icons-react";
-import { getAnimateMobileStyle, getAnimateStyle, getStaticStyle } from "../../helpers/Common";
+import {
+  getAnimateMobileStyle,
+  getAnimateStyle,
+  getStaticStyle,
+} from "../../helpers/Common";
 import {
   AddToCartAtom,
   AddToCartLoadingAtom,
@@ -25,8 +29,8 @@ const ProductCard = ({ product }: Props) => {
   const removeFromCart = useRecoilValue(RemveFromCartAtom);
   const [addLoading, setAddLoading] = useRecoilState(AddToCartLoadingAtom);
   const [cartItems, setCartItems] = useRecoilState(CartItemsAtom);
-  const {push}=useRouter()
-  const [token,setToken]=useRecoilState(TokenAtom)
+  const { push } = useRouter();
+  const [token, setToken] = useRecoilState(TokenAtom);
   const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
   const [coordinator, setCoordinator] = useState({
     x: 0,
@@ -38,10 +42,7 @@ const ProductCard = ({ product }: Props) => {
     setLoaded(true);
   };
 
-  
   const handleAnimateImage = (e: any) => {
-    console.log({ e });
-
     setCoordinator({
       x: e.clientX - 150,
       y: e.clientY - 200,
@@ -174,12 +175,9 @@ const ProductCard = ({ product }: Props) => {
     return hasPro;
   };
 
-
-
-
   return (
     <>
-    {animateImage && (
+      {animateImage && (
         //@ts-ignore
         <img src={renderImage()} alt="" style={renderAnimation()} />
       )}
@@ -191,7 +189,7 @@ const ProductCard = ({ product }: Props) => {
         <div>
           <Link href="#">
             <div className="card_img">
-            <img src={renderImage()} alt="" />
+              <img src={renderImage()} alt="" />
             </div>
           </Link>
           {has_discount_promotion() && (
@@ -204,7 +202,10 @@ const ProductCard = ({ product }: Props) => {
           <div className="product-hover-action">
             <ul>
               <li>
-                <Link href={`/details?product=${product.id}`} title="Quick View">
+                <Link
+                  href={`/details?product=${product.id}`}
+                  title="Quick View"
+                >
                   <i className="far fa-eye"></i>
                 </Link>
               </li>
@@ -223,7 +224,7 @@ const ProductCard = ({ product }: Props) => {
           <div className="cart-footer">
             <div className="product-price">
               <span>${product.variation.new_price}</span>
-              {product.variation.price && (
+              {has_discount_promotion() && product.variation.price && (
                 <del>
                   <span>
                     {product.variation.new_price &&

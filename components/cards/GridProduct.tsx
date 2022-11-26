@@ -201,7 +201,7 @@ const GridProduct = ({ product }: Props) => {
             {has_discount_promotion() && (
               <div className="product-badge">
                 <ul>
-                  <li className="sale-badge">5</li>
+                  <li className="sale-badge">5%</li>
                 </ul>
               </div>
             )}
@@ -216,7 +216,7 @@ const GridProduct = ({ product }: Props) => {
                   </Link>
                 </li>
               </ul>
-            </div>{" "}
+            </div>
           </div>
 
           <div className="product-info">
@@ -230,7 +230,7 @@ const GridProduct = ({ product }: Props) => {
             <div className="cart-footer">
               <div className="product-price">
                 <span>${product.variation.new_price}</span>
-                {product.variation.price && (
+                {has_discount_promotion() && product.variation.price && (
                   <del>
                     <span>
                       {product.variation.new_price &&

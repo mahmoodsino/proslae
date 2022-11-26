@@ -200,15 +200,15 @@ const VerticalProductCard = ({ product }: Props) => {
             </div>
           )}
           <h2
-            className="product-title"
+            className="product-title "
             // onClick={() => handleViewProduct(product)}
           >
-            <Link href={`/details?product=${product.id}`}>{product.name}</Link>
+            <Link className="line-clamp____2" href={`/details?product=${product.id}`}>{product.name}</Link>
           </h2>
           <div className="cart-footer">
             <div className="product-price">
               <span>${product.variation.new_price}</span>
-              {product.variation.price && (
+              {has_discount_promotion() && product.variation.price && (
                 <del>
                   <span>
                     {product.variation.new_price &&

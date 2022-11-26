@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { FormEvent } from "react";
 import { useToasts } from "react-toast-notifications";
 import { useRecoilState } from "recoil";
+import { TokenAtom } from "../../../../helpers/recoil";
 import { UserAtom } from "../../../../helpers/recoil/user";
+import { handelUpdateUserInfo } from "../../../../helpers/server/services";
 import CheckoutBTN from "../../../buttons/CheckoutBTN";
 import SimpleFileInput from "../../../inputs/SimpleFileInput";
 import SimpleInput from "../../../inputs/SimpleInput";
+import CircleProgressBar from "../../progress-bar";
 
 const CUSTOMER = "customer";
 const ORGANIZATION = "organization";
 
 const AccountDetails = () => {
   const [userInfo, setUserInfo] = useRecoilState(UserAtom);
-  
+  const [token,setToken] = useRecoilState(TokenAtom)
   const { addToast } = useToasts();
+  const [loading,setLoading]=useState(false)
   const [userData, setUserData] = useState({
     first_name: "",
     last_name:"",
@@ -174,25 +179,44 @@ const AccountDetails = () => {
     );
   }
 
-  const handleSaveChange = async () => {
-    if (!validateInputs()) {
-      addToast("Please fill all information!", { appearance: "warning" });
-      return;
+  // const handleSaveChange = async () => {
+  //   if (!validateInputs()) {
+  //     addToast("Please fill all information!", { appearance: "warning" });
+  //     return;
+  //   }
+  //   // let data = {
+  //   //   name: userData.full_name,
+  //   //   phone: userData.phone,
+  //   //   type: userData.is_organization === 1 ? ORGANIZATION : CUSTOMER,
+  //   // };
+  // };
+
+  const handelSubmit  = async (e:FormEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    const res = await handelUpdateUserInfo({token:token,email:userData.email ,firstName:userData.first_name,lastName:userData.last_name})
+    if(res === null){
+            addToast("some thing wrong happend", { appearance: "error" });
+            setLoading(false)
+    }else{
+      addToast("data updated successfully", { appearance: "success" });
+      setLoading(false)
     }
-    // let data = {
-    //   name: userData.full_name,
-    //   phone: userData.phone,
-    //   type: userData.is_organization === 1 ? ORGANIZATION : CUSTOMER,
-    // };
-  };
+
+  }
 
   return (
     <div>
       <div className="ltn__form-box">
-        <form>
+        <form onSubmit={handelSubmit}>
           <div className="row mb-50">{renderInputs()}</div>
           <div className="btn-wrapper">
-            <CheckoutBTN title="Save Changes" handleClick={handleSaveChange} />
+            {!loading ? 
+            <CheckoutBTN type="submit" title="Save Changes"/> : 
+            <div style={{display:"flex" , justifyContent:"center"}}>
+              <CircleProgressBar height={60} /> 
+            </div>
+            }
           </div>
         </form>
       </div>

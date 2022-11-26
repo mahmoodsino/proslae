@@ -24,6 +24,7 @@ const SIMILARPRODUCTS = `${baseURL}/products`
 const ABOUTUS = `${baseURL}/info/about`
 const REGISTERASSTORE = `${baseURL}/user/busniss-register`
 const CREATEORDER = `${baseURL}/orders`
+const UPDATEUSER = `${baseURL}/user/update`
 
 export {
   HOME_PAGE,
@@ -48,5 +49,6 @@ export {
   SIMILARPRODUCTS,
   ABOUTUS,
   REGISTERASSTORE,
-  CREATEORDER
+  CREATEORDER,
+  UPDATEUSER
 };
