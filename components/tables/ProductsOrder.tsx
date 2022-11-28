@@ -55,7 +55,7 @@ function Row({Products}:Props) {
 
 const ProductsOrder = () => {
     const [orderDetails, setOrderDetails] = useRecoilState(OrderDetailsAtom);
-    const data = orderDetails.items.map((product, index) => {
+    const data = orderDetails?.items?.map((product, index) => {
 		return <Row key={index} Products={product} />;
 	});
   return (

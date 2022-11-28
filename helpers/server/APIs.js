@@ -1,5 +1,6 @@
 const root = process.env.NEXT_PUBLIC_BASE;
 const baseURL = `${root}/api/v1/web`;
+const baseUrl_2 =`${root}/api/v1`
 
 const HOME_PAGE = `${baseURL}/home`;
 const FEATURED_PRODUCTS = `${baseURL}/products`;
@@ -25,6 +26,9 @@ const ABOUTUS = `${baseURL}/info/about`
 const REGISTERASSTORE = `${baseURL}/user/busniss-register`
 const CREATEORDER = `${baseURL}/orders`
 const UPDATEUSER = `${baseURL}/user/update`
+const PAYMENTPROVIDOR =`${baseUrl_2}/payment-way/payment-providers?is_enabled=1&branch_id=1`
+const PAYORDER = `${baseURL}/orders/pay`
+const COMPLETEPAYORDER = `${baseURL}/orders/payments/complete`
 
 export {
   HOME_PAGE,
@@ -50,5 +54,8 @@ export {
   ABOUTUS,
   REGISTERASSTORE,
   CREATEORDER,
-  UPDATEUSER
+  UPDATEUSER,
+  PAYMENTPROVIDOR,
+  PAYORDER,
+  COMPLETEPAYORDER
 };

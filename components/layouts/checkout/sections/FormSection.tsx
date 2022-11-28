@@ -24,9 +24,13 @@ import SimpleInput from "../../../inputs/SimpleInput";
 import {
   getCitesOfState,
   getStateOfCountry,
+  handelComletePay,
+  handelOrderPay,
 } from "../../../../helpers/server/services";
 import CheckoutBTN from "../../../buttons/CheckoutBTN";
 import CircleProgressBar from "../../progress-bar";
+import { PaymentProvidorAtom, paymentProvidorIdAtom, publicKeyAtom } from "../../../../helpers/recoil/payment";
+import { useRouter } from "next/router";
 
 interface IFormInputs {
   firstName: string;
@@ -60,6 +64,16 @@ const FormSection = () => {
   const [loading, setLoading] = useState(false);
   const [stateId, setStateId] = useState<number | undefined>();
   const { addToast } = useToasts();
+  const [paymentProvidorState, setPaymentProvidorState] =
+  useRecoilState(PaymentProvidorAtom);
+const [paymentProvidorId, setPaymenProvidorId] = useRecoilState(
+  paymentProvidorIdAtom
+);
+const [publicKey, setPublicKey] = useRecoilState(publicKeyAtom);
+const [clientSecret, setClientSecret] = useState<string>();
+
+const router = useRouter().query;
+
 
   const cardElementOptions = {
     iconStyle: "solid",
@@ -105,8 +119,8 @@ const FormSection = () => {
 
   const stripe = useStripe();
   const elements = useElements();
-
   const handelPay = async (data: IFormInputs) => {
+    let secrit: string = "";
     setPayLoading(true);
     const billingDetails = {
       name: `${data.firstName} ${data.lastName}`,
@@ -118,29 +132,53 @@ const FormSection = () => {
         // country:`${data.country}`
       },
     };
-    const { data: clintSecrit } = await axios.post("/api/payment_intents", {
-      amount: 5 * 100,
-    });
-    const cardElement = elements?.getElement(CardNumberElement);
-    const paymentMethodReq = await stripe?.createPaymentMethod({
-      type: "card",
-      //@ts-ignore
-      card: cardElement,
-      billing_details: billingDetails,
-    });
-
-    const confirmCardPayment = await stripe?.confirmCardPayment(clintSecrit, {
-      payment_method: paymentMethodReq?.paymentMethod?.id,
-    });
-    if (confirmCardPayment?.error) {
-      addToast(confirmCardPayment?.error?.message, { appearance: "error" });
+    if (router.savedOrder && !router.paymentTransaction) {
+      const res = await handelOrderPay(
+        token,
+        Number(router.savedOrder),
+        paymentProvidorId
+      );
+      if (res === null) {
+        addToast("fail", { appearance: "error" });
+      } else {
+        secrit = res.result.client_result.client_secret;
+        setClientSecret(res.result.client_result.client_secret);
+      }
     }
-    if (confirmCardPayment?.paymentIntent) {
-      addToast(confirmCardPayment.paymentIntent.status, {
-        appearance: "success",
+    if (router.savedOrder && router.paymentTransaction && paymentProvidorId) {
+      const res = await handelComletePay(
+        token,
+        Number(router.paymentTransaction)
+      );
+      if (res === null) {
+        addToast("fail", { appearance: "error" });
+      } else {
+        secrit = res.result.client_result.client_secret;
+        setClientSecret(res.result.client_result.client_secret);
+      }
+    }
+    if (secrit) {
+      const cardElement = elements?.getElement(CardNumberElement);
+      const paymentMethodReq = await stripe?.createPaymentMethod({
+        type: "card",
+        //@ts-ignore
+        card: cardElement,
+        billing_details: billingDetails,
       });
+
+      const confirmCardPayment = await stripe?.confirmCardPayment(secrit, {
+        payment_method: paymentMethodReq?.paymentMethod?.id,
+      });
+      if (confirmCardPayment?.error) {
+        addToast(confirmCardPayment?.error?.message, { appearance: "error" });
+
+      }
+      if (confirmCardPayment?.paymentIntent) {
+        addToast(confirmCardPayment.paymentIntent.status, {
+          appearance: "success",
+        });      }
+      setPayLoading(false);
     }
-    setPayLoading(false);
   };
 
   return (

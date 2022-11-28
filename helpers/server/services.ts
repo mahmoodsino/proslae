@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HOME_PAGE, FEATURED_PRODUCTS, BRANDS, REGIDTERASINDIVIDUAL, LOGIN, LOGOUT, USERINFO, COUNTRIES, STATES, CITIES, PRODUCTS, ADDTOCART, UPDATECART, GETCARTITEMS, DELETECART, ADDADDRESS, GETADDRESS, PROMOTIONS, DETAILS, SIMILARPRODUCTS, ABOUTUS, REGISTERASSTORE, CREATEORDER, UPDATEUSER } from "./APIs";
+import { HOME_PAGE, FEATURED_PRODUCTS, BRANDS, REGIDTERASINDIVIDUAL, LOGIN, LOGOUT, USERINFO, COUNTRIES, STATES, CITIES, PRODUCTS, ADDTOCART, UPDATECART, GETCARTITEMS, DELETECART, ADDADDRESS, GETADDRESS, PROMOTIONS, DETAILS, SIMILARPRODUCTS, ABOUTUS, REGISTERASSTORE, CREATEORDER, UPDATEUSER,COMPLETEPAYORDER,PAYMENTPROVIDOR,PAYORDER } from "./APIs";
 const getConfig = (token?: string | null) => {
 	return {
 		headers: {
@@ -467,4 +467,47 @@ const handelUpdateUserInfo = async (params: updateUSerParams) => {
 }
 
 
-export { getHomePageData, getFeaturedProducts, getBrands, handelRegister, handelLogin, handelLogout, getUser, getCountries, getStateOfCountry, getCitesOfState, getProducts, addToCart, updateCart, getCartItems, deleteCart, handelAddAress, getAddress, handelUpdateAddress, deleteAddress, getPromotions, getPromotionsProducts, getProductDetails, getSimilarProducts, getAbouUsInfo, handelRegisterAsStore,handelCrateOrder,getOrderById,getOrders,handelUpdateUserInfo };
+const pay =process.env.NEXT_PUBLIC_PUBLISH_KEY
+
+const getPaymentProvidor = async () => {
+    try {
+        const res = await axios.get(`${PAYMENTPROVIDOR}`,{
+            headers:{
+                "D-PAYMENT-AUTHORIZATION":`${pay}`
+            }
+        })
+        return res.data
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
+
+const handelOrderPay = async (token:string,order_id: number, payment_provider_id: number) => {
+    try {
+        const res = await axios.post(`${PAYORDER}`, {
+            order_id: order_id,
+            payment_provider_id: payment_provider_id
+        },getConfig(token))
+        return res.data
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
+const handelComletePay = async (token:string,payment_transaction_id: number) => {
+    try {
+        const res = await axios.post(`${COMPLETEPAYORDER}`, {
+            payment_transaction_id:payment_transaction_id
+        },getConfig(token))
+        return res.data
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
+
+export { getHomePageData, getFeaturedProducts, getBrands, handelRegister, handelLogin, handelLogout, getUser, getCountries, getStateOfCountry, getCitesOfState, getProducts, addToCart, updateCart, getCartItems, deleteCart, handelAddAress, getAddress, handelUpdateAddress, deleteAddress, getPromotions, getPromotionsProducts, getProductDetails, getSimilarProducts, getAbouUsInfo, handelRegisterAsStore,handelCrateOrder,getOrderById,getOrders,handelUpdateUserInfo,getPaymentProvidor,handelOrderPay,handelComletePay };
