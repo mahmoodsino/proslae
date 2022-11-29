@@ -46,6 +46,54 @@ const getFeaturedProducts = async (params:FeaturedParams) => {
 	}
 };
 
+const getLatestProducts = async (token?:string) => {
+	try {
+	  const res = await axios.get(`${PRODUCTS}?OrderByNewest&page_size=10`, {
+		headers: {
+		  "branch-id": 1,
+		  "company-id": 1,
+		  Authorization: `Bearer ${token}`
+		},
+	  })
+	  return res.data
+	} catch (error) {
+	  console.log(error)
+	  return null
+	}
+  }
+
+  const getTopProducts = async (token?:string) => {
+    try {
+        const res = await axios.get(`${PRODUCTS}?orderbyrandom&page_size=10`, {
+            headers: {
+              "branch-id": 1,
+              "company-id": 1,
+              Authorization: `Bearer ${token}`
+            },
+          })
+          return res.data
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
+const getTopSellingProducts = async (token?:string) => {
+    try {
+        const res = await axios.get(`${PRODUCTS}?orderbyrandom&page_size=10`, {
+            headers: {
+              "branch-id": 1,
+              "company-id": 1,
+              Authorization: `Bearer ${token}`
+            },
+          })
+          return res.data
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
 const getBrands = async () => {
 	try {
 		const res = await axios.get(`${BRANDS}`, getConfig());
@@ -510,4 +558,4 @@ const handelComletePay = async (token:string,payment_transaction_id: number) => 
 }
 
 
-export { getHomePageData, getFeaturedProducts, getBrands, handelRegister, handelLogin, handelLogout, getUser, getCountries, getStateOfCountry, getCitesOfState, getProducts, addToCart, updateCart, getCartItems, deleteCart, handelAddAress, getAddress, handelUpdateAddress, deleteAddress, getPromotions, getPromotionsProducts, getProductDetails, getSimilarProducts, getAbouUsInfo, handelRegisterAsStore,handelCrateOrder,getOrderById,getOrders,handelUpdateUserInfo,getPaymentProvidor,handelOrderPay,handelComletePay };
+export { getHomePageData, getFeaturedProducts, getBrands, handelRegister, handelLogin, handelLogout, getUser, getCountries, getStateOfCountry, getCitesOfState, getProducts, addToCart, updateCart, getCartItems, deleteCart, handelAddAress, getAddress, handelUpdateAddress, deleteAddress, getPromotions, getPromotionsProducts, getProductDetails, getSimilarProducts, getAbouUsInfo, handelRegisterAsStore,handelCrateOrder,getOrderById,getOrders,handelUpdateUserInfo,getPaymentProvidor,handelOrderPay,handelComletePay,getLatestProducts,getTopProducts,getTopSellingProducts };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useMediaQuery } from "react-responsive";
@@ -60,18 +60,16 @@ const Panal = () => {
     setShowArrows(false);
   };
 
-
-  const renderImage = () => {
-    return "cat.webp";
-  };
+  useEffect(() => {
+    setProductsCount(featuredProducts.length);
+  }, [featuredProducts]);
 
   return (
     <div
-      onMouseEnter={() =>
-        !isTabletOrMobile || !isPortrait ? handleEnter : null
-      }
+      //@ts-ignore
+      onMouseEnter={!isTabletOrMobile || !isPortrait ? handleEnter : null}
       style={!isTabletOrMobile || !isPortrait ? { padding: "0px" } : {}}
-      //   onMouseEnter={!isTabletOrMobile || !isPortrait ? handleEnter : null}
+      // onMouseEnter={!isTabletOrMobile || !isPortrait ? handleEnter : null}
       onMouseLeave={() =>
         !isTabletOrMobile || !isPortrait ? handleLeave : null
       }

@@ -45,10 +45,6 @@ const MainSection = () => {
     const isMobile = useMediaQuery({ query: '(max-width: 500px)' });
 
 
-
-
-
-
   const renderSidebar = () => {
     if (currentIndex === 1) return <Categories />;
     return <Brands />;
