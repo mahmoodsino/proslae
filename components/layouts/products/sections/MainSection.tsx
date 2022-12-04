@@ -3,7 +3,7 @@ import TopAreaPages from "../../pages-top-area/TopAreaPages";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 import CircleProgressBar from "../../progress-bar";
-import { getProducts } from "../../../../helpers/server/services";
+import { getProducts, handelFilterProduct } from "../../../../helpers/server/services";
 import { useRecoilState } from "recoil";
 import {
   ProductsAtom,
@@ -44,6 +44,9 @@ const MainSection = () => {
   const timerRef = useRef() as MutableRefObject<NodeJS.Timeout>;
 
   const { query,replace } = useRouter();
+
+
+
 
   useEffect(() => {
     if (typeof query.page !== "undefined") {

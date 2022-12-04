@@ -2,15 +2,15 @@ import React, { FormEvent, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useRecoilState } from "recoil";
 import { Minus, Plus } from "tabler-icons-react";
-import BrandsAtom from "../../../../helpers/recoil/home/BrandsAtom";
-import CategoriesAtom from "../../../../helpers/recoil/home/CategoriesAtom";
-import { CategoriesType } from "../../../../helpers/types";
+import { BrandsType, CategoriesType } from "../../../../helpers/types";
 import QueryFiltersAtom from "../../../../helpers/recoil/products/FiltersQueryAtom";
 import { motion, AnimatePresence } from "framer-motion";
 import SimpleBTN from "../../../buttons/SimpleBTN";
 import CategoryModal from "./CategoryModal";
 import { useRouter } from "next/router";
 import SearchAtom from "../../../../helpers/recoil/home/SearchAtom";
+import { handelFilterProduct } from "../../../../helpers/server/services";
+import { useToasts } from "react-toast-notifications";
 
 const variants = {
   hidden: {
@@ -31,20 +31,34 @@ let SleBran: number[] = [];
 
 const CategoriesBrands = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
-  const [categories, setCategories] = useRecoilState(CategoriesAtom);
-  const [brands, setBrands] = useRecoilState(BrandsAtom);
   const [openedCategory, setOpenedCategory] = useState(-1);
   const [queryFilter, setQueryFilter] = useRecoilState(QueryFiltersAtom);
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useRecoilState(SearchAtom)
-
+  const { addToast } = useToasts();
   const {replace,query} = useRouter()
+  const [productsCategorey, setProductsCategory] = useState<CategoriesType[]>([])
+  const [brands, setBrands] = useState<BrandsType[]>([])
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await handelFilterProduct();
+      if(res===null){
+        addToast("Something wrong happened!", { appearance: "error" });      }
+        else{
+          setProductsCategory(res.result.categories);
+          setBrands(res.result.brands);
+
+      }
+    };
+    getData();
+  }, []);
 
 
   const renderCategories = () => {
     return (
       <ul className="side_bar_height side_bar">
-        {categories.map((category_, index) => {
+        {productsCategorey.map((category_, index) => {
           return (
             <div  key={category_.id}>
               <li style={{listStyleType:"none",display:"flex",alignItems:"center"}}>

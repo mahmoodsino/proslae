@@ -29,6 +29,7 @@ const UPDATEUSER = `${baseURL}/user/update`
 const PAYMENTPROVIDOR =`${baseUrl_2}/payment-way/payment-providers?is_enabled=1&branch_id=1`
 const PAYORDER = `${baseURL}/orders/pay`
 const COMPLETEPAYORDER = `${baseURL}/orders/payments/complete`
+const FILTERS = `${baseURL}/products/filters`
 
 export {
   HOME_PAGE,
@@ -57,5 +58,6 @@ export {
   UPDATEUSER,
   PAYMENTPROVIDOR,
   PAYORDER,
-  COMPLETEPAYORDER
+  COMPLETEPAYORDER,
+  FILTERS
 };

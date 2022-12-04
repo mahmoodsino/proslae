@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HOME_PAGE, FEATURED_PRODUCTS, BRANDS, REGIDTERASINDIVIDUAL, LOGIN, LOGOUT, USERINFO, COUNTRIES, STATES, CITIES, PRODUCTS, ADDTOCART, UPDATECART, GETCARTITEMS, DELETECART, ADDADDRESS, GETADDRESS, PROMOTIONS, DETAILS, SIMILARPRODUCTS, ABOUTUS, REGISTERASSTORE, CREATEORDER, UPDATEUSER,COMPLETEPAYORDER,PAYMENTPROVIDOR,PAYORDER } from "./APIs";
+import { HOME_PAGE, FEATURED_PRODUCTS, BRANDS, REGIDTERASINDIVIDUAL, LOGIN, LOGOUT, USERINFO, COUNTRIES, STATES, CITIES, PRODUCTS, ADDTOCART, UPDATECART, GETCARTITEMS, DELETECART, ADDADDRESS, GETADDRESS, PROMOTIONS, DETAILS, SIMILARPRODUCTS, ABOUTUS, REGISTERASSTORE, CREATEORDER, UPDATEUSER,COMPLETEPAYORDER,PAYMENTPROVIDOR,PAYORDER, FILTERS } from "./APIs";
 const getConfig = (token?: string | null) => {
 	return {
 		headers: {
@@ -558,4 +558,20 @@ const handelComletePay = async (token:string,payment_transaction_id: number) => 
 }
 
 
-export { getHomePageData, getFeaturedProducts, getBrands, handelRegister, handelLogin, handelLogout, getUser, getCountries, getStateOfCountry, getCitesOfState, getProducts, addToCart, updateCart, getCartItems, deleteCart, handelAddAress, getAddress, handelUpdateAddress, deleteAddress, getPromotions, getPromotionsProducts, getProductDetails, getSimilarProducts, getAbouUsInfo, handelRegisterAsStore,handelCrateOrder,getOrderById,getOrders,handelUpdateUserInfo,getPaymentProvidor,handelOrderPay,handelComletePay,getLatestProducts,getTopProducts,getTopSellingProducts };
+const handelFilterProduct = async () => {
+    try {
+            const res = await axios.get(`${FILTERS}`, {
+                headers: {
+                    "branch_id": 1,
+                    "company-id": 1,
+                }
+            })
+            return res.data
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
+
+export { getHomePageData, getFeaturedProducts, getBrands, handelRegister, handelLogin, handelLogout, getUser, getCountries, getStateOfCountry, getCitesOfState, getProducts, addToCart, updateCart, getCartItems, deleteCart, handelAddAress, getAddress, handelUpdateAddress, deleteAddress, getPromotions, getPromotionsProducts, getProductDetails, getSimilarProducts, getAbouUsInfo, handelRegisterAsStore,handelCrateOrder,getOrderById,getOrders,handelUpdateUserInfo,getPaymentProvidor,handelOrderPay,handelComletePay,getLatestProducts,getTopProducts,getTopSellingProducts,handelFilterProduct };
