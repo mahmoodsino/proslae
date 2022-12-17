@@ -14,7 +14,7 @@ import { getPaymentProvidor } from "../helpers/server/services";
 
 let stripePromise: any;
 
-const checkout = () => {
+const Checkout = () => {
   const [paymentProvidorState, setPaymentProvidorState] =
     useRecoilState(PaymentProvidorAtom);
   const [paymentProvidorId, setPaymenProvidorId] = useRecoilState(
@@ -59,12 +59,17 @@ const checkout = () => {
           <ChechoutMainSection />
         </Elements>
       ) : (
-        <div>
-          <CircleProgressBar height={60} />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <CircleProgressBar height={70} />
         </div>
       )}
     </div>
   );
 };
-
-export default checkout;
+export default Checkout;

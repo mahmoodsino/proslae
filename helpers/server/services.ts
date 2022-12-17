@@ -1,5 +1,8 @@
-import axios from "axios";
+import apiWorker from "./axios";
 import { HOME_PAGE, FEATURED_PRODUCTS, BRANDS, REGIDTERASINDIVIDUAL, LOGIN, LOGOUT, USERINFO, COUNTRIES, STATES, CITIES, PRODUCTS, ADDTOCART, UPDATECART, GETCARTITEMS, DELETECART, ADDADDRESS, GETADDRESS, PROMOTIONS, DETAILS, SIMILARPRODUCTS, ABOUTUS, REGISTERASSTORE, CREATEORDER, UPDATEUSER,COMPLETEPAYORDER,PAYMENTPROVIDOR,PAYORDER, FILTERS } from "./APIs";
+
+
+
 const getConfig = (token?: string | null) => {
 	return {
 		headers: {
@@ -14,7 +17,7 @@ const getConfig = (token?: string | null) => {
 };
 const getHomePageData = async () => {
 	try {
-		const res = await axios.get(`${HOME_PAGE}`, getConfig());
+		const res = await apiWorker.get(`${HOME_PAGE}`, getConfig());
 		return res.data;
 	} catch (error: any) {
 		console.log(error.response);
@@ -29,7 +32,7 @@ interface FeaturedParams  {
 
 const getFeaturedProducts = async (params:FeaturedParams) => {
 	try {
-		const res = await axios.get(`${FEATURED_PRODUCTS}?is_featured=1`,{
+		const res = await apiWorker.get(`${FEATURED_PRODUCTS}?is_featured=1`,{
 			headers: {
 				"branch-id": "1",
 				"company-id": 1,
@@ -48,7 +51,7 @@ const getFeaturedProducts = async (params:FeaturedParams) => {
 
 const getLatestProducts = async (token?:string) => {
 	try {
-	  const res = await axios.get(`${PRODUCTS}?OrderByNewest&page_size=10`, {
+	  const res = await apiWorker.get(`${PRODUCTS}?OrderByNewest&page_size=10`, {
 		headers: {
 		  "branch-id": 1,
 		  "company-id": 1,
@@ -64,7 +67,7 @@ const getLatestProducts = async (token?:string) => {
 
   const getTopProducts = async (token?:string) => {
     try {
-        const res = await axios.get(`${PRODUCTS}?orderbyrandom&page_size=10`, {
+        const res = await apiWorker.get(`${PRODUCTS}?orderbyrandom&page_size=10`, {
             headers: {
               "branch-id": 1,
               "company-id": 1,
@@ -80,7 +83,7 @@ const getLatestProducts = async (token?:string) => {
 
 const getTopSellingProducts = async (token?:string) => {
     try {
-        const res = await axios.get(`${PRODUCTS}?orderbyrandom&page_size=10`, {
+        const res = await apiWorker.get(`${PRODUCTS}?orderbyrandom&page_size=10`, {
             headers: {
               "branch-id": 1,
               "company-id": 1,
@@ -96,7 +99,7 @@ const getTopSellingProducts = async (token?:string) => {
 
 const getBrands = async () => {
 	try {
-		const res = await axios.get(`${BRANDS}`, getConfig());
+		const res = await apiWorker.get(`${BRANDS}`, getConfig());
 		return res.data;
 	} catch (error: any) {
 		console.log(error.response);
@@ -107,7 +110,7 @@ const getBrands = async () => {
 
 const handelRegister = async (first_name: string, last_name: string, email: string, password: string, phone_code: string, phone_number: number, token?: string | null) => {
 	try {
-		const res = await axios.post(`${REGIDTERASINDIVIDUAL}`, {
+		const res = await apiWorker.post(`${REGIDTERASINDIVIDUAL}`, {
 			first_name: first_name,
 			last_name: last_name,
 			email: email,
@@ -119,6 +122,7 @@ const handelRegister = async (first_name: string, last_name: string, email: stri
 	} catch (error: any) {
 		console.log(error);
 		if (error.response.status == 400) {
+		}else if (error.response.status == 422){
 			return error.response.status
 		} else {
 			return null
@@ -129,7 +133,7 @@ const handelRegister = async (first_name: string, last_name: string, email: stri
 
 const handelLogin = async (password: string, email: string, token?: string | null) => {
 	try {
-		const res = await axios.post(`${LOGIN}`, {
+		const res = await apiWorker.post(`${LOGIN}`, {
 			email: email,
 			password: password
 		}, getConfig(token))
@@ -143,7 +147,7 @@ const handelLogin = async (password: string, email: string, token?: string | nul
 
 const handelLogout = async (token: string) => {
 	try {
-		const res = await axios.post(`${LOGOUT}`, {}, getConfig(token))
+		const res = await apiWorker.post(`${LOGOUT}`, {}, getConfig(token))
 		return res.data
 	} catch (error) {
 		console.log(error)
@@ -153,7 +157,7 @@ const handelLogout = async (token: string) => {
 
 const getUser = async (token: string) => {
 	try {
-		const res = await axios.get(`${USERINFO}`, getConfig(token))
+		const res = await apiWorker.get(`${USERINFO}`, getConfig(token))
 		return res.data
 	} catch (error) {
 		console.log(error)
@@ -163,7 +167,7 @@ const getUser = async (token: string) => {
 
 const getCountries = async () => {
 	try {
-		const res = await axios.get(`${COUNTRIES}`)
+		const res = await apiWorker.get(`${COUNTRIES}`)
 		return res.data
 	} catch (error) {
 		console.log(error)
@@ -173,7 +177,7 @@ const getCountries = async () => {
 
 const getStateOfCountry = async (id: number) => {
 	try {
-		const res = await axios.get(`${STATES}/${id}`)
+		const res = await apiWorker.get(`${STATES}/${id}`)
 		return res.data
 	} catch (error) {
 		console.log(error)
@@ -184,7 +188,7 @@ const getStateOfCountry = async (id: number) => {
 
 const getCitesOfState = async (id: number) => {
 	try {
-		const res = await axios.get(`${CITIES}/${id}`)
+		const res = await apiWorker.get(`${CITIES}/${id}`)
 		return res.data
 	} catch (error) {
 		console.log(error)
@@ -202,7 +206,7 @@ interface Params {
 
 const getProducts = async (params: Params) => {
 	try {
-		const res = await axios.get(`${PRODUCTS}?page_size=20&OrderByNewest`, {
+		const res = await apiWorker.get(`${PRODUCTS}?page_size=20&OrderByNewest`, {
 			headers: {
 				"branch-id": "1",
 				"company-id": 1,
@@ -224,7 +228,7 @@ const getProducts = async (params: Params) => {
 
 const addToCart = async (token: string, type: number, product_id: number, variation_id: number, company_id: number, branch_id: number, quantity: number) => {
 	try {
-		const res = await axios.post(`${ADDTOCART}`, {
+		const res = await apiWorker.post(`${ADDTOCART}`, {
 			type: type,
 			product_id: product_id,
 			variation_id: variation_id,
@@ -247,7 +251,7 @@ const addToCart = async (token: string, type: number, product_id: number, variat
 
 const updateCart = async (token: string, id: number, quantity: number) => {
 	try {
-		const res = await axios.put(`${UPDATECART}/${id}`, {
+		const res = await apiWorker.put(`${UPDATECART}/${id}`, {
 			quantity: quantity,
 		}, getConfig(token)
 		)
@@ -264,7 +268,7 @@ const updateCart = async (token: string, id: number, quantity: number) => {
 
 const getCartItems = async (token: string) => {
 	try {
-		const res = await axios.get(`${GETCARTITEMS}`, getConfig(token)
+		const res = await apiWorker.get(`${GETCARTITEMS}`, getConfig(token)
 		)
 		return res.data
 	} catch (error) {
@@ -275,7 +279,7 @@ const getCartItems = async (token: string) => {
 
 const deleteCart = async (token: string, id: number) => {
 	try {
-		const res = await axios.delete(`${DELETECART}/${id}`, getConfig(token)
+		const res = await apiWorker.delete(`${DELETECART}/${id}`, getConfig(token)
 		)
 		return res.data
 	} catch (error) {
@@ -286,7 +290,7 @@ const deleteCart = async (token: string, id: number) => {
 
 const handelAddAress = async (name: string, address: string, country_id: string, state_id: number, city_id: number, city_name: string, post_code: number, build_number: number, token: string) => {
 	try {
-		const res = await axios.post(`${ADDADDRESS}`, {
+		const res = await apiWorker.post(`${ADDADDRESS}`, {
 			name: name,
 			address: address,
 			country_id: country_id,
@@ -305,7 +309,7 @@ const handelAddAress = async (name: string, address: string, country_id: string,
 
 const getAddress = async (token: string) => {
 	try {
-		const res = await axios.get(`${GETADDRESS}`, getConfig(token))
+		const res = await apiWorker.get(`${GETADDRESS}`, getConfig(token))
 		return res.data
 	} catch (error) {
 		console.log(error)
@@ -315,7 +319,7 @@ const getAddress = async (token: string) => {
 
 const handelUpdateAddress = async (id: number | string, name: string, address: string, country_id: string, state_id: number, city_id: number, city_name: string, post_code: number, build_number: number, token: string) => {
 	try {
-		const res = await axios.put(`${ADDADDRESS}/${id}`, {
+		const res = await apiWorker.put(`${ADDADDRESS}/${id}`, {
 			name: name,
 			address: address,
 			country_id: country_id,
@@ -334,7 +338,7 @@ const handelUpdateAddress = async (id: number | string, name: string, address: s
 
 const deleteAddress = async (token: string, id: number | string) => {
 	try {
-		const res = await axios.delete(`${ADDADDRESS}/${id}`, getConfig(token))
+		const res = await apiWorker.delete(`${ADDADDRESS}/${id}`, getConfig(token))
 		return res.data
 	} catch (error) {
 		console.log(error)
@@ -344,7 +348,7 @@ const deleteAddress = async (token: string, id: number | string) => {
 
 const getPromotions = async () => {
 	try {
-		const res = await axios.get(`${PROMOTIONS}`, {
+		const res = await apiWorker.get(`${PROMOTIONS}`, {
 			headers: {
 				"branch-id": 1,
 				"company-id": 1,
@@ -366,7 +370,7 @@ interface PromotionsParams {
 
 const getPromotionsProducts = async (params: PromotionsParams) => {
 	try {
-		const res = await axios.get(`${PRODUCTS}?OrderByNewest&page_size=25&${params.promotion && params.promotion > 0 && `promotion=${params.promotion}`}`, {
+		const res = await apiWorker.get(`${PRODUCTS}?OrderByNewest&page_size=25&${params.promotion && params.promotion > 0 && `promotion=${params.promotion}`}`, {
 			headers: {
 				"branch-id": 1,
 				"company-id": 1,
@@ -386,7 +390,7 @@ const getPromotionsProducts = async (params: PromotionsParams) => {
 
 const getProductDetails = async (id: number) => {
 	try {
-		const res = await axios.get(`${DETAILS}/${id}`, {
+		const res = await apiWorker.get(`${DETAILS}/${id}`, {
 			headers: {
 				'branch-id': 1,
 				"company-id": 1,
@@ -402,7 +406,7 @@ const getProductDetails = async (id: number) => {
 
 const getSimilarProducts = async (id: number) => {
 	try {
-		const res = await axios.get(`${SIMILARPRODUCTS}/${id}/similar`, {
+		const res = await apiWorker.get(`${SIMILARPRODUCTS}/${id}/similar`, {
 			headers: {
 				'branch-id': 1,
 				'company-id': 1
@@ -417,7 +421,7 @@ const getSimilarProducts = async (id: number) => {
 
 const getAbouUsInfo = async () => {
 	try {
-		const res = await axios.get(`${ABOUTUS}`)
+		const res = await apiWorker.get(`${ABOUTUS}`)
 		return res.data
 	} catch (error) {
 		console.log(error)
@@ -427,7 +431,7 @@ const getAbouUsInfo = async () => {
 
 const handelRegisterAsStore = async (first_name: string, last_name: string, email: string, password: string, phone_code: string, phone_number: number, tax_id: string, tax_id_doc: string, token?: string | null) => {
 	try {
-		const res = await axios.post(`${REGISTERASSTORE}`, {
+		const res = await apiWorker.post(`${REGISTERASSTORE}`, {
 			first_name: first_name,
 			last_name: last_name,
 			email: email,
@@ -441,6 +445,8 @@ const handelRegisterAsStore = async (first_name: string, last_name: string, emai
 	} catch (error: any) {
 		console.log(error);
 		if (error.response.status == 400) {
+			return error.response.status
+		} else if(error.response.status == 422) {
 			return error.response.status
 		} else {
 			return null
@@ -459,7 +465,7 @@ interface ORDERParams {
 
 const handelCrateOrder = async (params: ORDERParams) => {
     try {
-        const res = await axios.post(`${CREATEORDER}`, {
+        const res = await apiWorker.post(`${CREATEORDER}`, {
             description: "hello",
             branch_id: 1,
             shipping_method: params.shipping_method,
@@ -475,7 +481,7 @@ const handelCrateOrder = async (params: ORDERParams) => {
 
 const getOrderById = async (token:string,id:number) => {
     try {
-        const res = await axios.get(`${CREATEORDER}/${id}`,getConfig(token))
+        const res = await apiWorker.get(`${CREATEORDER}/${id}`,getConfig(token))
         return res.data
     } catch (error) {
         console.log(error)
@@ -485,7 +491,7 @@ const getOrderById = async (token:string,id:number) => {
 
 const getOrders = async (token:string) => {
     try {
-        const res = await axios.get(`${CREATEORDER}?branch=1`,  getConfig(token))
+        const res = await apiWorker.get(`${CREATEORDER}?branch=1`,  getConfig(token))
         return res.data
     } catch (error) {
         console.log(error)
@@ -502,7 +508,7 @@ interface updateUSerParams {
 
 const handelUpdateUserInfo = async (params: updateUSerParams) => {
     try {
-        const res = await axios.post(`${UPDATEUSER}`,{
+        const res = await apiWorker.post(`${UPDATEUSER}`,{
                 first_name: params.firstName,
                 last_name: params.lastName,
 				email:params.email
@@ -519,7 +525,7 @@ const pay =process.env.NEXT_PUBLIC_PUBLISH_KEY
 
 const getPaymentProvidor = async () => {
     try {
-        const res = await axios.get(`${PAYMENTPROVIDOR}`,{
+        const res = await apiWorker.get(`${PAYMENTPROVIDOR}`,{
             headers:{
                 "D-PAYMENT-AUTHORIZATION":`${pay}`
             }
@@ -534,7 +540,7 @@ const getPaymentProvidor = async () => {
 
 const handelOrderPay = async (token:string,order_id: number, payment_provider_id: number) => {
     try {
-        const res = await axios.post(`${PAYORDER}`, {
+        const res = await apiWorker.post(`${PAYORDER}`, {
             order_id: order_id,
             payment_provider_id: payment_provider_id
         },getConfig(token))
@@ -547,7 +553,7 @@ const handelOrderPay = async (token:string,order_id: number, payment_provider_id
 
 const handelComletePay = async (token:string,payment_transaction_id: number) => {
     try {
-        const res = await axios.post(`${COMPLETEPAYORDER}`, {
+        const res = await apiWorker.post(`${COMPLETEPAYORDER}`, {
             payment_transaction_id:payment_transaction_id
         },getConfig(token))
         return res.data
@@ -560,7 +566,7 @@ const handelComletePay = async (token:string,payment_transaction_id: number) => 
 
 const handelFilterProduct = async () => {
     try {
-            const res = await axios.get(`${FILTERS}`, {
+            const res = await apiWorker.get(`${FILTERS}`, {
                 headers: {
                     "branch_id": 1,
                     "company-id": 1,

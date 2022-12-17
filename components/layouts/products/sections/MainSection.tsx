@@ -20,6 +20,7 @@ import MoveTopBTN from "../../../buttons/MoveTopBTN";
 import FixedCart from "../../../cart/FixedCart";
 import BottomCart from "../../../cart/BottomCart";
 import { useRouter } from "next/router";
+import CartMobileMenu from "../../../cart/CartMobileMenu";
 
 const variants = {
   hidden: {
@@ -145,6 +146,8 @@ const MainSection = () => {
   return (
     <div>
       <CartMenu />
+      <CartMobileMenu />
+
       <MoveTopBTN />
       {token && !isMobile ? <FixedCart /> : token && isMobile && <BottomCart />}
 

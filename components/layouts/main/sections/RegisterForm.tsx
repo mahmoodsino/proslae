@@ -3,17 +3,17 @@ import React, { useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import { useRecoilState } from "recoil";
 import {
-  setToken,
-  setUser,
   STORE,
   INDIVIDUAL,
-  LOGIN_COMPONENT,
   REGISTER_STEP2_COMPONENT,
   REGISTER_STEP1_COMPONENT,
 } from "../../../../helpers/Common";
 import LogRegisterAtom from "../../../../helpers/recoil/log-register/LogRegisterAtom";
 import UserTypeAtom from "../../../../helpers/recoil/log-register/UserTypeAtom";
-import { handelRegister, handelRegisterAsStore } from "../../../../helpers/server/services";
+import {
+  handelRegister,
+  handelRegisterAsStore,
+} from "../../../../helpers/server/services";
 import SimpleBTN from "../../../buttons/SimpleBTN";
 import SimpleInput from "../../../inputs/SimpleInput";
 import CircleProgressBar from "../../progress-bar";
@@ -40,7 +40,7 @@ const RegisterForm = () => {
   const [logORregister, setLogORregister] = useRecoilState(LogRegisterAtom);
   const [loading, setLoading] = useState(false);
   const { push } = useRouter();
-  const [storeMassege,setStoreMasseg]=useRecoilState(storeMassegeAtom)
+  const [storeMassege, setStoreMasseg] = useRecoilState(storeMassegeAtom);
 
   function validateCustomer() {
     if (
@@ -327,7 +327,7 @@ const RegisterForm = () => {
     if (!checkPasswordsMatch()) return;
     setLoading(true);
 
-    if(userData.user_type === INDIVIDUAL){
+    if (userData.user_type === INDIVIDUAL) {
       const res = await handelRegister(
         userData.first_name,
         userData.last_name,
@@ -339,13 +339,18 @@ const RegisterForm = () => {
       if (res === 400) {
         addToast("Username or password is not valid!", { appearance: "error" });
         setLoading(false);
-  
+        return;
+      }
+      if (res === 422) {
+        addToast("The email has already been taken.", { appearance: "error" });
+        setLoading(false);
+
         return;
       }
       if (res === null) {
         addToast("Something wrong happened!", { appearance: "error" });
         setLoading(false);
-  
+
         return;
       }
       if (res) {
@@ -356,51 +361,53 @@ const RegisterForm = () => {
         localStorage.setItem("last_name", res.result.user.last_name);
         localStorage.setItem("type", "user");
         setLoading(false);
-  
-        window.location.href ="./";
+        window.location.href = "./";
       }
-    }else{
-      const res = await handelRegisterAsStore( userData.first_name,
+    } else {
+      const res = await handelRegisterAsStore(
+        userData.first_name,
         userData.last_name,
         userData.email,
         userData.password,
         userData.postalCode,
         userData.phone,
         userData.description,
-        userData.attachment)
-        console.log(res);
-        
-        if (res === 400) {
-          addToast("Username or password is not valid!", { appearance: "error" });
-          setLoading(false);
-    
-          return;
-        }
-        if (res === null) {
-          addToast("Something wrong happened!", { appearance: "error" });
-          setLoading(false);
-    
-          return;
-        }
-        if (res) {
-          if(res.result.token){
-            localStorage.setItem("token", res.result.token);
-            localStorage.setItem("id", res.result.user.id);
-            localStorage.setItem("email", res.result.user.email);
-            localStorage.setItem("first_name", res.result.user.first_name);
-            localStorage.setItem("last_name", res.result.user.last_name);
-            localStorage.setItem("type", "user");
-            window.location.href ="./";
-          }else{
-            setStoreMasseg(true)
-            setLogORregister(2);
-          }
+        userData.attachment
+      );
+      console.log(res);
 
-          setLoading(false);
+      if (res === 400) {
+        addToast("Username or password is not valid!", { appearance: "error" });
+        setLoading(false);
+        return;
+      }
+      if (res === 422) {
+        addToast("The email has already been taken.", { appearance: "error" });
+        setLoading(false);
+        return;
+      }
+      if (res === null) {
+        addToast("Something wrong happened!", { appearance: "error" });
+        setLoading(false);
 
-          
-    
+        return;
+      }
+      if (res) {
+        if (res.result.token) {
+          localStorage.setItem("token", res.result.token);
+          localStorage.setItem("id", res.result.user.id);
+          localStorage.setItem("email", res.result.user.email);
+          localStorage.setItem("first_name", res.result.user.first_name);
+          localStorage.setItem("last_name", res.result.user.last_name);
+          localStorage.setItem("type", "user");
+          window.location.href = "./";
+        } else {
+          setStoreMasseg(true);
+          setLogORregister(2);
         }
+
+        setLoading(false);
+      }
     }
   };
 
@@ -448,9 +455,9 @@ const RegisterForm = () => {
       <form>
         {renderInputs()}
         {loading ? (
-         <div style={{display:"flex", justifyContent:"center"}}>
-         <CircleProgressBar height={60} />
-       </div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <CircleProgressBar height={60} />
+          </div>
         ) : (
           <div className="text-right">
             <div>{renderButtons()}</div>

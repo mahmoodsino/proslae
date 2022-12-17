@@ -91,8 +91,6 @@ const LoginForm = () => {
 		addToast(res?.message, { appearance: "error" });
 		setLoading(false);
 	  }
-    console.log(res);
-    
     if (res?.token) {
       setLoading(false);
       localStorage.setItem("token", res.token);

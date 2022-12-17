@@ -1,0 +1,27 @@
+.main-div {
+    overflow-y: auto;
+    position: fixed;
+    z-index: 50;
+    background-color: #ffffff;
+    transition-property: all;
+    transition-duration: 300ms;
+    /* transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); */
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    height: 70vh;
+    width: 100%;
+    bottom: 0px;
+
+}
+
+.dlack-div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 40;
+    background-color: #000000;
+    opacity: 0.25;
+
+}

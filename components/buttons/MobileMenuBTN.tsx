@@ -1,11 +1,10 @@
 import Link from "next/link";
-import React, { useContext } from "react";
+import React from "react";
 import { useRecoilState } from "recoil";
 import { useShowStickyHeader } from "../../helpers/hooks";
 import OpenmobileMenuAtom from "../../helpers/recoil/sidebar/OpenmobileMenuAtom";
 
 export default function MobileDropDown() {
-  // const { dispatch } = useContext(MobileMenuContext.default);
   const { showHeader } = useShowStickyHeader.default();
   const [openMobileMenu,setOpenMobailMenu]=useRecoilState(OpenmobileMenuAtom)
 

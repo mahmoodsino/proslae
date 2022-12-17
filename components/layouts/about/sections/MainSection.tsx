@@ -4,6 +4,7 @@ import MobileMenuBTN from "../../../../components/buttons/MobileMenuBTN";
 import CartMenu from "../../../cart/CartMenu";
 import { getAbouUsInfo } from "../../../../helpers/server/services";
 import CircleProgressBar from "../../progress-bar";
+import CartMobileMenu from "../../../cart/CartMobileMenu";
 
 const MainSection = () => {
     const [loading,setLoading]=useState(false)
@@ -27,6 +28,7 @@ const MainSection = () => {
       <HeaderBaseComponent />
       <MobileMenuBTN />
       <CartMenu />
+      <CartMobileMenu />
       {loading ? (
 				<div className="loader">
 					<CircleProgressBar  height={60} />

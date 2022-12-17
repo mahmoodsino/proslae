@@ -34,6 +34,7 @@ import openCategoriesDialogAtom from "../../../../helpers/recoil/sidebar/openCat
 import CategoriesDialog from "../../../dialogs/CategoriesDialog";
 import { SliderAtom } from "../../../../helpers/recoil";
 import { SelectedFeaturedCAtegories } from "./ProductTap";
+import CartMobileMenu from "../../../cart/CartMobileMenu";
 
 const MainSection = () => {
 
@@ -56,6 +57,7 @@ const MainSection = () => {
       <HeaderBaseComponent />
       <MobileMenuBTN />
       <CartMenu />
+      <CartMobileMenu />
       <MoveTopBTN />
       {token && !isMobile ? <FixedCart /> : token && isMobile && <BottomCart />}  
       <div className="ltn__slider-area ltn__slider-3---">

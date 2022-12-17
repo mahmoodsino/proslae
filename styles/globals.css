@@ -21,6 +21,7 @@
 @import url("../assets/css/details.css");
 @import url("../assets/css/detailsCard.css");
 @import url("../assets/css/checkout.css");
+@import url("../assets/css/CartMobileMenu.css");
 
 .postal-code{
     display: flex;

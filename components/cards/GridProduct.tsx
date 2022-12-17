@@ -222,7 +222,7 @@ const GridProduct = ({ product }: Props) => {
           <div className="product-info">
             <span className="product-brand">{product.brand?.name}</span>
             <h5
-              className="product-title product_name"
+              className="product-title product_name line-clamp____2"
               //  onClick={() => handleViewProduct(product)}
             >
               {product?.name}

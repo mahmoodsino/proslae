@@ -213,11 +213,9 @@ const ProductCard = ({ product }: Props) => {
           </div>
         </div>
         <div className="product-info">
-          <span className="product-brand">{product?.brand?.name}</span>
+          <span className="product-brand  ">{product?.brand?.name}</span>
           <h5
-            className="product-title product_name"
-
-            // onClick={() => handleViewProduct(product)}
+            className="product-title product_name line-clamp____2"
           >
             {product.name}
           </h5>

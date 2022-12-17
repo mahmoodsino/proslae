@@ -33,8 +33,8 @@ const TopBrandCard = ({ brand }: Props) => {
   };
 
   return (
-    <div className="col-12 mb-30">
-      <div className="ltn__category-item ltn__category-item-2 text-center image__">
+    <div style={{height:"294px"}} className="col-12 mb-30">
+      <div style={{height:"294px"}} className="ltn__category-item ltn__category-item-2 text-center image__">
         <img
           src={brand.img ? brand.img : "/alternative.png"}
           alt=""
@@ -42,7 +42,7 @@ const TopBrandCard = ({ brand }: Props) => {
           onLoad={handleLoadImage}
         />
         <div className="ltn__category-item-name">
-          <h5>{brand.name}</h5>
+          <h5 style={{height:"45px",fontWeight:""}} className="line-clamp____2">{brand.name}</h5>
           <h5>
             <Link href={`/products?brand=${brand.id}`} onClick={clickBrand}>
               Browse

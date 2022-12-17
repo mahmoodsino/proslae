@@ -3,83 +3,76 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { ShoppingCartX, X, ArrowRight } from "tabler-icons-react";
-import SidebarMotion from "../../components/motions/Sidebar";
+import { ArrowRight, ShoppingCartX, X } from "tabler-icons-react";
 import { formatFloatNumber } from "../../helpers/Common";
-import {
-  AllCartsInfoAtom,
-  CartItemsAtom,
-  RemveFromCartAtom,
-} from "../../helpers/recoil";
-import CartMenuAtom from "../../helpers/recoil/home/CartMenuAtom";
-import { ProductsType } from "../../helpers/types";
-
-interface Props {
-  products: ProductsType;
-}
+import { AllCartsInfoAtom, CartItemsAtom, RemveFromCartAtom } from "../../helpers/recoil";
+import MobileCartMenuAtom from "../../helpers/recoil/home/MobileCartMenuAtom";
 
 function Card() {
-  const [cartItems, setCartItems] = useRecoilState(CartItemsAtom);
-  const removeFromCart = useRecoilValue(RemveFromCartAtom);
-  const [openCartMenu, setOpenCartMenu] = useRecoilState(CartMenuAtom);
-
-  const viewProduct = () => {};
-
-  return (
-    <div>
-      {cartItems.map((item, i) => {
-        return (
-          <div key={i} className="mini-cart-item clearfix">
-            <div className="mini-cart-img">
-              <Link href="#">
-                <img src="alternative.png" alt="alt" />
-              </Link>
-              <span
-                className="mini-cart-item-delete"
-                onClick={() => item.id && removeFromCart(item.id,"remove")}
-              >
-                <X />
-              </span>
+    const [cartItems, setCartItems] = useRecoilState(CartItemsAtom);
+    const removeFromCart = useRecoilValue(RemveFromCartAtom);
+  
+    const viewProduct = () => {};
+  
+    return (
+      <div >
+        {cartItems.map((item, i) => {
+          return (
+            <div key={i} className="mini-cart-item clearfix">
+              <div className="mini-cart-img">
+                <Link href="#">
+                  <img src="alternative.png" alt="alt" />
+                </Link>
+                <span
+                  className="mini-cart-item-delete"
+                  onClick={() => item.id && removeFromCart(item.id,"remove")}
+                >
+                  <X />
+                </span>
+              </div>
+              <div className="mini-cart-info" onClick={viewProduct}>
+                <h6>
+                  <Link href="#">{item.product?.name}</Link>
+                </h6>
+                <span className="mini-cart-quantity">
+                  {item.quantity}x${item.variation?.price}
+                </span>
+              </div>
             </div>
-            <div className="mini-cart-info" onClick={viewProduct}>
-              <h6>
-                <Link href="#">{item.product?.name}</Link>
-              </h6>
-              <span className="mini-cart-quantity">
-                {item.quantity}x${item.variation?.price}
-              </span>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+          );
+        })}
+      </div>
+    );
+  }
 
-const CartMenu = () => {
+
+
+
+
+const CartMobileMenu = () => {
+  const [openMobileCartMenu, setOpenMobileCartMenu] =
+    useRecoilState(MobileCartMenuAtom);
   const isMobile = useMediaQuery({ query: "(max-width: 512px)" });
-  const [openCartMenu, setOpenCartMenu] = useRecoilState(CartMenuAtom);
   const { push } = useRouter();
   const [allCartsInfo, setAllCartsInfo] = useRecoilState(AllCartsInfoAtom);
 
   const closeMenu = () => {
-    setOpenCartMenu(false);
+    setOpenMobileCartMenu(false);
   };
 
   const handleCheckout = () => {
-    setOpenCartMenu(false)
+    setOpenMobileCartMenu(false)
     push("/cart");
   };
 
+
+
   return (
-    <SidebarMotion
-      className="ltn__utilize ltn__utilize-cart-menu"
-      isShow={openCartMenu}
-      handleClose={() => setOpenCartMenu(false)}
-    >
+    < >
+      <div style={openMobileCartMenu ? { bottom: "0" } : { bottom: "-100%"}} className={`main-div`}>
       <div className="ltn__utilize-menu-inner ltn__scrollbar">
-        <div className="ltn__utilize-menu-head py-2 mt-1">
-          <span style={{paddingLeft:'10px'}} className="ltn__utilize-menu-title ">Shopping Cart</span>
+        <div className="ltn__utilize-menu-head py-2">
+          <span style={{paddingLeft:"10px" , top:"0px"}} className="ltn__utilize-menu-title ">Shopping Cart</span>
           <button className="ltn__utilize-close" onClick={closeMenu}>
             ×
           </button>
@@ -121,8 +114,13 @@ const CartMenu = () => {
           </div>
         )}
       </div>
-    </SidebarMotion>
+
+      </div>
+      {openMobileCartMenu && 
+      <div onClick={() => setOpenMobileCartMenu(false)} className="dlack-div"></div>
+      }
+    </>
   );
 };
 
-export default CartMenu;
+export default CartMobileMenu;

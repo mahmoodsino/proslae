@@ -327,7 +327,9 @@ export default function App({ Component, pageProps }: AppProps) {
             <MobileMenu />
 
             <StickyHeader />
-            <Component {...pageProps} />
+            <div style={{ minHeight: "60vh" }}>
+              <Component {...pageProps} />
+            </div>
             <Footer />
           </MyApp>
         </ToastProvider>

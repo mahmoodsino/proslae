@@ -12,6 +12,7 @@ import { ProductsType } from "../../../../helpers/types";
 import MoveTopBTN from "../../../buttons/MoveTopBTN";
 import BottomCart from "../../../cart/BottomCart";
 import CartMenu from "../../../cart/CartMenu";
+import CartMobileMenu from "../../../cart/CartMobileMenu";
 import FixedCart from "../../../cart/FixedCart";
 import TopAreaPages from "../../pages-top-area/TopAreaPages";
 import CircleProgressBar from "../../progress-bar";
@@ -54,6 +55,7 @@ const MainSection = () => {
     <div>
       <TopAreaPages title="Product Details" isMini={true} />
       <CartMenu />
+      <CartMobileMenu />
       <MoveTopBTN />
       {token && !isMobile ? <FixedCart /> : token && isMobile && <BottomCart />}
 
