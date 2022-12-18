@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FormEventHandler, useEffect, useState } from "react";
 import { FormEvent } from "react";
 import { useToasts } from "react-toast-notifications";
 import { useRecoilState } from "recoil";
@@ -191,7 +191,7 @@ const AccountDetails = () => {
   //   // };
   // };
 
-  const handelSubmit  = async (e:FormEvent<HTMLInputElement>) => {
+  const handelSubmit  = async (e: any)    => {
     e.preventDefault()
     setLoading(true)
     const res = await handelUpdateUserInfo({token:token,email:userData.email ,firstName:userData.first_name,lastName:userData.last_name})
